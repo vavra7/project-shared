@@ -1,11 +1,14 @@
 import { TEST_A } from "@project-shared/app/src/pages/test";
-// import { TEST_S } from "./test";
 import express from "express";
 
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send(TEST_A);
+  let a = TEST_A(1, 2);
+
+  console.log(a);
+
+  res.send(a);
 });
 
-app.listen(4000, () => console.log("Server started on port 4000"));
+app.listen(5000, () => console.log("Server started on port 5000"));

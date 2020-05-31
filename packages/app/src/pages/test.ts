@@ -1,1 +1,1 @@
-export const TEST_A = "TEST FROM APP";
+export const TEST_A = (a: number, b: number) => `result: ${a + b}`;

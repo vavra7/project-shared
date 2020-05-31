@@ -1,20 +1,7 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "allowJs": true,
-    "skipLibCheck": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": false,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "forceConsistentCasingInFileNames": true,
+    "module": "CommonJS",
 
     "removeComments": true,
     "sourceMap": true,
