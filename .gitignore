@@ -1,1 +1,7 @@
-node_modules
+/node_modules
+
+/packages/app/node_modules
+/packages/app/.next
+
+/packages/server/node_modules
+/packages/server/build
