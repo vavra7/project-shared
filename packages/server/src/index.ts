@@ -1,4 +1,4 @@
-import { TEST_A } from '@project-shared/app/src/pages/test';
+import { TEST_A } from '@project-shared/app/src/test';
 import express from 'express';
 
 const app = express();
