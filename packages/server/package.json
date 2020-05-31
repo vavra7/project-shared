@@ -1,0 +1,9 @@
+{
+  "name": "@project-shared/server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@project-shared/client": "1.0.0"
+  }
+}
