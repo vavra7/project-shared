@@ -10,7 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@project-shared/common": "1.0.0",
+    "@project-shared/shared": "1.0.0",
     "next": "^9.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"

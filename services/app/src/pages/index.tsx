@@ -1,5 +1,5 @@
 import React from 'react';
-import { add } from '@project-shared/common';
+import { add } from '@project-shared/shared';
 
 const index: React.FC = () => {
   return (

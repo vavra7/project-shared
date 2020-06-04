@@ -1,7 +1,7 @@
 /node_modules
 
-/packages/common/node_modules
-/packages/common/build
+/packages/shared/node_modules
+/packages/shared/build
 
 /services/app/node_modules
 /services/app/.next
