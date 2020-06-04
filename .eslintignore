@@ -1,10 +1,10 @@
 /node_modules
 
-/packages/app/node_modules
-/packages/app/.next
-
 /packages/common/node_modules
 /packages/common/build
 
-/packages/server/node_modules
-/packages/server/build
+/services/app/node_modules
+/services/app/.next
+
+/services/server/node_modules
+/services/server/build
