@@ -1,0 +1,10 @@
+/node_modules
+
+/packages/shared/node_modules
+/packages/shared/build
+
+/services/app/node_modules
+/services/app/.next
+
+/services/server/node_modules
+/services/server/build
