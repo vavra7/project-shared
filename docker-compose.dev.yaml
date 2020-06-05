@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  shared:
+    container_name: dev_project-shared_shared
+    image: vavra/dev_project-shared_shared
+    build:
+      context: ./
+      dockerfile: ./packages/shared/Dockerfile.dev
+      args:
+        NODE_VERSION: 13.14
+    volumes:
+      - type: bind
+        source: ./
+        target: /usr/src/app
+      - type: volume
+        target: /usr/src/app/services
+
+  app:
+    container_name: dev_project-shared_app
+    image: vavra/dev_project-shared_app
+    build:
+      context: ./
+      dockerfile: ./services/app/Dockerfile.dev
+      args:
+        NODE_VERSION: 13.14
+    depends_on:
+      - shared
+    ports:
+      - '3000:3000'
+    volumes:
+      - type: bind
+        source: ./
+        target: /usr/src/app
+      - type: volume
+        target: /usr/src/app/services/server
+
+  server:
+    container_name: dev_project-shared_server
+    image: vavra/dev_project-shared_server
+    build:
+      context: ./
+      dockerfile: ./services/server/Dockerfile.dev
+      args:
+        NODE_VERSION: 13.14
+    depends_on:
+      - shared
+    ports:
+      - '4000:4000'
+    volumes:
+      - type: bind
+        source: ./
+        target: /usr/src/app
+      - type: volume
+        target: /usr/src/app/services/app

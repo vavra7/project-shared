@@ -11,7 +11,6 @@ COPY tsconfig.json ./
 
 COPY /packages/shared ./packages/shared
 COPY /services/app ./services/app
-COPY /services/app ./services/app
 
 RUN yarn install --pure-lockfile --non-interactive
 

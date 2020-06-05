@@ -1,0 +1,17 @@
+ARG NODE_VERSION
+
+FROM node:${NODE_VERSION}
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
+COPY tsconfig.json ./
+
+COPY /packages/shared ./packages/shared
+
+RUN yarn
+
+WORKDIR /usr/src/app/packages/shared
+RUN yarn build
+
+CMD ["yarn", "dev"]

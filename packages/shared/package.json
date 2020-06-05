@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint 'src/**/*.{js,ts}'",
     "build": "tsc",
-    "build:watch": "tsc --watch"
+    "dev": "tsc --watch"
   },
   "dependencies": {},
   "devDependencies": {}
