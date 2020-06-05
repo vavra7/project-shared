@@ -7,6 +7,8 @@ services:
     build:
       context: ./
       dockerfile: ./services/app/Dockerfile
+      args:
+        NODE_VERSION: 14.4
     ports:
       - "3000:3000"
   server:
@@ -15,5 +17,7 @@ services:
     build: 
       context: ./
       dockerfile: ./services/server/Dockerfile
+      args:
+        NODE_VERSION: 14.4
     ports: 
       - "4000:4000"

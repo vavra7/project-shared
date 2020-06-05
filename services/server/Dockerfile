@@ -1,4 +1,7 @@
-FROM node:13.14 as builder
+ARG NODE_VERSION
+
+
+FROM node:${NODE_VERSION} as builder
 
 WORKDIR /usr/src/app
 
@@ -19,7 +22,7 @@ RUN yarn build
 
 
 
-FROM node:13.14
+FROM node:${NODE_VERSION}
 
 WORKDIR /usr/src/app
 
