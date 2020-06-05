@@ -1,13 +1,28 @@
+import 'reflect-metadata';
 import express from 'express';
-import { add } from '@project-shared/shared';
+import { ApolloServer } from 'apollo-server-express';
+import { buildSchema, Resolver, Query } from 'type-graphql';
 
-const app = express();
+const PORT = 4000;
 
-app.get('/', (req, res) => {
-  const a = add(1, 4, 9);
+@Resolver()
+class HelloResolver {
+  @Query(() => String)
+  hello() {
+    return 'Hello world!';
+  }
+}
 
-  res.send(`${a} asdjhgjfvfa`);
-  // res.send(`asdkghfvf`);
-});
+async function main() {
+  const schema = await buildSchema({
+    resolvers: [HelloResolver]
+  });
+  const apolloServer = new ApolloServer({ schema });
+  const app = express();
 
-app.listen(4000, () => console.log('Server started on port 4000'));
+  apolloServer.applyMiddleware({ app });
+
+  app.listen(PORT, () => console.log(`ready - started server on http://localhost:${PORT}`));
+}
+
+main();
