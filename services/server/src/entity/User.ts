@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 
 @ObjectType()
@@ -22,4 +29,12 @@ export class User extends BaseEntity {
 
   @Column('text')
   password: string;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  @Field()
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  @Field()
+  updatedAt: Date;
 }
