@@ -1,23 +1,50 @@
-version: "3.8"
+version: '3.8'
 
 services:
   app:
-    container_name: project-shared_app
     image: vavra/project-shared_app
+    container_name: project-shared_app
     build:
       context: ./
       dockerfile: ./services/app/Dockerfile
       args:
         NODE_VERSION: 14.4
+    depends_on:
+      - server
     ports:
-      - "3000:3000"
+      - '3000:3000'
+
   server:
-    container_name: project-shared_server
     image: vavra/project-shared_server
-    build: 
+    container_name: project-shared_server
+    build:
       context: ./
       dockerfile: ./services/server/Dockerfile
       args:
         NODE_VERSION: 14.4
-    ports: 
-      - "4000:4000"
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - db
+    ports:
+      - '4000:4000'
+
+  db:
+    image: postgres:12
+    container_name: project-shared_db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - type: volume
+        source: db-data
+        target: /var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+volumes:
+  db-data:
+    name: project-shared_db-data

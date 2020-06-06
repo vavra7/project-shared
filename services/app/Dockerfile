@@ -30,7 +30,7 @@ COPY package.json ./
 COPY yarn.lock ./
 
 COPY --from=builder /usr/src/app/packages/shared/package.json /usr/src/app/packages/shared/package.json
-COPY --from=builder /usr/src/app/packages/shared/build /usr/src/app/packages/shared/build
+COPY --from=builder /usr/src/app/packages/shared/dist /usr/src/app/packages/shared/dist
 
 COPY --from=builder /usr/src/app/services/app/package.json /usr/src/app/services/app/package.json
 COPY --from=builder /usr/src/app/services/app/.next /usr/src/app/services/app/.next

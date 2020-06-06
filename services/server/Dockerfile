@@ -30,10 +30,10 @@ COPY package.json ./
 COPY yarn.lock ./
 
 COPY --from=builder /usr/src/app/packages/shared/package.json /usr/src/app/packages/shared/package.json
-COPY --from=builder /usr/src/app/packages/shared/build /usr/src/app/packages/shared/build
+COPY --from=builder /usr/src/app/packages/shared/dist /usr/src/app/packages/shared/dist
 
 COPY --from=builder /usr/src/app/services/server/package.json /usr/src/app/services/server/package.json
-COPY --from=builder /usr/src/app/services/server/build /usr/src/app/services/server/build
+COPY --from=builder /usr/src/app/services/server/dist /usr/src/app/services/server/dist
 
 RUN yarn install --pure-lockfile --non-interactive --production
 
