@@ -1,12 +1,14 @@
 {
   "cSpell.words": [],
   "cSpell.ignoreWords": [
+    "citext",
     "esnext",
     "postgres",
     "postgresql",
     "readonly",
     "respawn",
     "typeorm",
+    "varchar",
     "vavra"
   ]
 }

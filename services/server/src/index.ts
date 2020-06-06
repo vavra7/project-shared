@@ -1,10 +1,10 @@
 import 'reflect-metadata';
+import dotenv from 'dotenv';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 import { resolvers } from './resolver';
-import dotenv from 'dotenv';
 import { entities } from './entity';
 
 const PORT = 4000;
@@ -19,17 +19,14 @@ async function main() {
     database: process.env.DB_NAME,
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
+    dropSchema: true,
     synchronize: true,
-    logging: true,
+    logging: false,
     entities: entities
-  })
-    .then(() => {
-      console.log('database connection SUCCESSFUL');
-    })
-    .catch(err => {
-      console.log('database connection FAILED');
-      console.log(err);
-    });
+  }).catch(err => {
+    console.error('database connection FAILED');
+    console.error(err);
+  });
 
   const schema = await buildSchema({
     resolvers: resolvers
