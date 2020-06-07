@@ -22,6 +22,7 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "@typescript-eslint/ban-types": 0,
+    "@typescript-eslint/no-non-null-assertion": 0,
     "newline-before-return": 1
   }
 }
