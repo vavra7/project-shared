@@ -6,6 +6,8 @@
     "postgres",
     "postgresql",
     "readonly",
+    "requirepass",
+    "resave",
     "respawn",
     "typeorm",
     "varchar",

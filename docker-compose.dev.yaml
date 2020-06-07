@@ -43,10 +43,13 @@ services:
       dockerfile: ./services/server/Dockerfile.dev
       args:
         NODE_VERSION: 13.14
-    environment: 
+    environment:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
+      STORAGE_PASSWORD: ${STORAGE_PASSWORD}
+      SESSION_SECRET: ${SESSION_SECRET}
+      APP_URL: ${APP_URL}
     depends_on:
       - shared
       - db
@@ -73,6 +76,19 @@ services:
     ports:
       - '5432:5432'
 
+  storage:
+    image: redis:6
+    container_name: dev_project-shared_storage
+    command: redis-server --requirepass ${STORAGE_PASSWORD}
+    volumes:
+      - type: volume
+        source: storage-data
+        target: /var/lib/redis
+    ports:
+      - '6379:6397'
+
 volumes:
   db-data:
     name: project-shared_db-data
+  storage-data:
+    name: project-shared_storage-data
