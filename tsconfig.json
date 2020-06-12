@@ -14,5 +14,6 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "exclude": ["node_modules", "services/server/dist", "services/client/.next"]
 }

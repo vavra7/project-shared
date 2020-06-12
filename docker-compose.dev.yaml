@@ -16,12 +16,12 @@ services:
       - type: volume
         target: /usr/src/app/services
 
-  app:
-    image: vavra/dev_project-shared_app
-    container_name: dev_project-shared_app
+  client:
+    image: vavra/dev_project-shared_client
+    container_name: dev_project-shared_client
     build:
       context: ./
-      dockerfile: ./services/app/Dockerfile.dev
+      dockerfile: ./services/client/Dockerfile.dev
       args:
         NODE_VERSION: 13.14
     depends_on:
@@ -60,7 +60,7 @@ services:
         source: ./
         target: /usr/src/app
       - type: volume
-        target: /usr/src/app/services/app
+        target: /usr/src/app/services/client
 
   db:
     image: postgres:12

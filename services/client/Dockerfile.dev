@@ -9,12 +9,12 @@ COPY package.json ./
 COPY tsconfig.json ./
 
 COPY /packages/shared ./packages/shared
-COPY /services/app ./services/app
+COPY /services/client ./services/client
 
 RUN yarn
 
 WORKDIR /usr/src/app/packages/shared
 RUN yarn build
 
-WORKDIR /usr/src/app/services/app
+WORKDIR /usr/src/app/services/client
 CMD ["yarn", "dev"]

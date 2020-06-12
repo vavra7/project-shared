@@ -3,8 +3,8 @@
 /packages/shared/node_modules
 /packages/shared/dist
 
-/services/app/node_modules
-/services/app/.next
+/services/client/node_modules
+/services/client/.next
 
 /services/server/node_modules
 /services/server/dist

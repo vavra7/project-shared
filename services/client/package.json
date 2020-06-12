@@ -1,5 +1,5 @@
 {
-  "name": "@project-shared/app",
+  "name": "@project-shared/client",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {

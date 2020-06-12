@@ -10,14 +10,14 @@ COPY yarn.lock ./
 COPY tsconfig.json ./
 
 COPY /packages/shared ./packages/shared
-COPY /services/app ./services/app
+COPY /services/client ./services/client
 
 RUN yarn install --pure-lockfile --non-interactive
 
 WORKDIR /usr/src/app/packages/shared
 RUN yarn build
 
-WORKDIR /usr/src/app/services/app
+WORKDIR /usr/src/app/services/client
 RUN yarn build
 
 
@@ -32,8 +32,8 @@ COPY yarn.lock ./
 COPY --from=builder /usr/src/app/packages/shared/package.json /usr/src/app/packages/shared/package.json
 COPY --from=builder /usr/src/app/packages/shared/dist /usr/src/app/packages/shared/dist
 
-COPY --from=builder /usr/src/app/services/app/package.json /usr/src/app/services/app/package.json
-COPY --from=builder /usr/src/app/services/app/.next /usr/src/app/services/app/.next
+COPY --from=builder /usr/src/app/services/client/package.json /usr/src/app/services/client/package.json
+COPY --from=builder /usr/src/app/services/client/.next /usr/src/app/services/client/.next
 
 RUN yarn install --pure-lockfile --non-interactive --production
 
