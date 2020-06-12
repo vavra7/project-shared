@@ -3,6 +3,7 @@
   "cSpell.ignoreWords": [
     "citext",
     "esnext",
+    "inmemory",
     "postgres",
     "postgresql",
     "readonly",

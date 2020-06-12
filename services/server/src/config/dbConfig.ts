@@ -8,7 +8,7 @@ export const dbConfig: ConnectionOptions = {
   database: process.env.DB_NAME,
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  dropSchema: true,
+  dropSchema: false,
   synchronize: true,
   logging: false,
   entities: entities
