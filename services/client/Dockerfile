@@ -37,6 +37,6 @@ COPY --from=builder /usr/src/app/services/client/.next /usr/src/app/services/cli
 
 RUN yarn install --pure-lockfile --non-interactive --production
 
-WORKDIR /usr/src/app/services/app
+WORKDIR /usr/src/app/services/client
 
 CMD [ "yarn", "start" ]

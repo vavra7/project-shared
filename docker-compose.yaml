@@ -9,6 +9,9 @@ services:
       dockerfile: ./services/client/Dockerfile
       args:
         NODE_VERSION: 14.4
+    environment: 
+      GQL_NETWORK_URL: ${GQL_NETWORK_URL}
+      GQL_PUBLIC_URL: ${GQL_PUBLIC_URL}
     depends_on:
       - server
     ports:
@@ -28,7 +31,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       STORAGE_PASSWORD: ${STORAGE_PASSWORD}
       SESSION_SECRET: ${SESSION_SECRET}
-      APP_URL: ${APP_URL}
+      CLIENT_URL: ${APP_CLIENT}
     depends_on:
       - db
     ports:
