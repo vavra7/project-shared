@@ -34,6 +34,7 @@ COPY --from=builder /usr/src/app/packages/shared/dist /usr/src/app/packages/shar
 
 COPY --from=builder /usr/src/app/services/client/package.json /usr/src/app/services/client/package.json
 COPY --from=builder /usr/src/app/services/client/.next /usr/src/app/services/client/.next
+COPY --from=builder /usr/src/app/services/client/next.config.js /usr/src/app/services/client/next.config.js
 
 RUN yarn install --pure-lockfile --non-interactive --production
 

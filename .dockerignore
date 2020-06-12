@@ -1,10 +1,14 @@
 /node_modules
+/yarn-error.log
 
 /packages/shared/node_modules
 /packages/shared/dist
+/packages/shared/yarn-error.log
 
 /services/client/node_modules
 /services/client/.next
+/services/client/yarn-error.log
 
 /services/server/node_modules
 /services/server/dist
+/services/server/yarn-error.log
