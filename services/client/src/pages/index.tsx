@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import { NormalizedCacheObject } from 'apollo-cache-inmemory';
 
 interface Props {
-  test: NormalizedCacheObject | string;
+  initialApolloState: NormalizedCacheObject | string;
 }
 
 const TEST_QUERY = gql`
@@ -38,9 +38,7 @@ index.getInitialProps = async () => {
     query: TEST_QUERY
   });
 
-  return { test: apolloClient.cache.extract() };
-
-  // return { test: 'apolloClient.cache.extract()' };
+  return { initialApolloState: apolloClient.cache.extract() };
 };
 
 export default index;

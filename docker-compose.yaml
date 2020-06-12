@@ -31,7 +31,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       STORAGE_PASSWORD: ${STORAGE_PASSWORD}
       SESSION_SECRET: ${SESSION_SECRET}
-      CLIENT_URL: ${APP_CLIENT}
+      CLIENT_URL: ${CLIENT_URL}
     depends_on:
       - db
     ports:
