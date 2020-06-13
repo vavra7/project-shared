@@ -2,6 +2,7 @@
   "cSpell.words": [],
   "cSpell.ignoreWords": [
     "citext",
+    "codegen",
     "esnext",
     "inmemory",
     "postgres",

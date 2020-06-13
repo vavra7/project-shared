@@ -24,7 +24,7 @@ services:
       dockerfile: ./services/client/Dockerfile.dev
       args:
         NODE_VERSION: 13.14
-    environment: 
+    environment:
       GQL_NETWORK_URL: ${GQL_NETWORK_URL}
       GQL_PUBLIC_URL: ${GQL_PUBLIC_URL}
     depends_on:
@@ -54,8 +54,9 @@ services:
       SESSION_SECRET: ${SESSION_SECRET}
       CLIENT_URL: ${CLIENT_URL}
     depends_on:
-      - shared
       - db
+      - storage
+      - shared
     ports:
       - '4000:4000'
     volumes:

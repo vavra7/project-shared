@@ -2,22 +2,12 @@ import { NextPage } from 'next';
 import { add } from '@project-shared/shared';
 import { getApolloClient } from '../lib/apolloClient';
 import Link from 'next/link';
-import gql from 'graphql-tag';
 import { NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { testQuery } from '../graphql/query/user/test';
 
 interface Props {
   initialApolloState: NormalizedCacheObject | string;
 }
-
-const TEST_QUERY = gql`
-  query {
-    test {
-      id
-      email
-      lastName
-    }
-  }
-`;
 
 const index: NextPage<Props> = props => {
   return (
@@ -35,7 +25,7 @@ index.getInitialProps = async () => {
   const apolloClient = getApolloClient();
 
   await apolloClient.query({
-    query: TEST_QUERY
+    query: testQuery
   });
 
   return { initialApolloState: apolloClient.cache.extract() };

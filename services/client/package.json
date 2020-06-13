@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "next",
+    "dev": "concurrently \"next\" \"graphql-codegen --config codegen.json --watch 'src/graphql/**/*.ts'\"",
     "lint": "eslint 'src/**/*.{js,ts,txj}'",
     "build": "next build",
     "export": "next export",
-    "start": "next start"
+    "start": "next start",
+    "codegen": "graphql-codegen --config codegen.json --watch 'src/graphql/**/*.ts'"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
@@ -22,6 +23,12 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.15.3",
+    "@graphql-codegen/introspection": "1.15.3",
+    "@graphql-codegen/typescript": "1.15.3",
+    "@graphql-codegen/typescript-operations": "1.15.3",
+    "@graphql-codegen/typescript-react-apollo": "1.15.3",
+    "@types/graphql": "^14.5.0",
     "@types/react": "^16.9.36",
     "babel-plugin-graphql-tag": "^2.5.0",
     "eslint-plugin-react": "^7.20.0"
