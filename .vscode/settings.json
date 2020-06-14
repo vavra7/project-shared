@@ -5,6 +5,7 @@
     "codegen",
     "esnext",
     "inmemory",
+    "overscroll",
     "postgres",
     "postgresql",
     "readonly",

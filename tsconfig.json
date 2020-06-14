@@ -15,5 +15,10 @@
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules", "services/server/dist", "services/client/.next"]
+  "exclude": [
+    "node_modules",
+    "services/server/dist",
+    "services/client/.next",
+    "packages/shared/dist"
+  ]
 }

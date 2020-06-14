@@ -1,0 +1,54 @@
+$spaces: (
+	0: $base-size * 0,
+	1: $base-size * 0.25,
+	2: $base-size * 0.5,
+	3: $base-size * 1,
+	4: $base-size * 1.5,
+	5: $base-size * 3
+);
+
+@each $space, $size in $spaces {
+	.ma-#{$space} {
+		margin: $size;
+	}
+
+	.mx-#{$space} {
+		margin-left: $size;
+		margin-right: $size;
+	}
+
+	.my-#{$space} {
+		margin-top: $size;
+		margin-bottom: $size;
+	}
+
+	.mt-#{$space} {
+		margin-top: $size;
+	}
+
+	.mr-#{$space} {
+		margin-right: $size;
+	}
+	
+	.mb-#{$space} {
+		margin-bottom: $size;
+	}
+
+	.ml-#{$space} {
+		margin-left: $size;
+	}
+
+	.pa-#{$space} {
+		padding: $size;
+	}
+
+	.px-#{$space} {
+		padding-left: $size;
+		padding-right: $size;
+	}
+
+	.py-#{$space} {
+		padding-top: $size;
+		padding-bottom: $size;
+	}
+}
