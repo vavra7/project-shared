@@ -4,6 +4,7 @@
     "citext",
     "codegen",
     "esnext",
+    "formik",
     "inmemory",
     "overscroll",
     "postgres",

@@ -19,9 +19,13 @@ const L1: FC<Props> = ({ children }) => {
         <Link href="/test">
           <a>test</a>
         </Link>
+
+        <Link href="/register">
+          <a>register</a>
+        </Link>
       </Container>
 
-      {children}
+      <div className="mt-3">{children}</div>
     </>
   );
 };

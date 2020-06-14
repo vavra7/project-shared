@@ -56,6 +56,17 @@ export type RegisterInput = {
   password: Scalars['String'];
 };
 
+export type RegisterMutationVariables = Exact<{
+  data: RegisterInput;
+}>;
+
+export type RegisterMutation = { __typename?: 'Mutation' } & {
+  register: { __typename?: 'User' } & Pick<
+    User,
+    'id' | 'email' | 'firstName' | 'lastName' | 'createdAt' | 'updatedAt'
+  >;
+};
+
 export type TestQueryVariables = Exact<{ [key: string]: never }>;
 
 export type TestQuery = { __typename?: 'Query' } & {
@@ -65,6 +76,27 @@ export type TestQuery = { __typename?: 'Query' } & {
   >;
 };
 
+export const RegisterDocument = gql`
+  mutation Register($data: RegisterInput!) {
+    register(data: $data) {
+      id
+      email
+      firstName
+      lastName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export type RegisterMutationFn = ApolloReactCommon.MutationFunction<
+  RegisterMutation,
+  RegisterMutationVariables
+>;
+export type RegisterMutationResult = ApolloReactCommon.MutationResult<RegisterMutation>;
+export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  RegisterMutation,
+  RegisterMutationVariables
+>;
 export const TestDocument = gql`
   query Test {
     test {
