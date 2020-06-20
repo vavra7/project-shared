@@ -22,7 +22,8 @@
     "next": "^9.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "sass": "^1.26.8"
+    "sass": "^1.26.8",
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.15.3",
@@ -32,6 +33,7 @@
     "@graphql-codegen/typescript-react-apollo": "1.15.3",
     "@types/graphql": "^14.5.0",
     "@types/react": "^16.9.36",
+    "@types/yup": "^0.29.3",
     "babel-plugin-graphql-tag": "^2.5.0",
     "eslint-plugin-react": "^7.20.0"
   }
