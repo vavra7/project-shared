@@ -13,6 +13,7 @@
     "requirepass",
     "resave",
     "respawn",
+    "smtp",
     "typeorm",
     "varchar",
     "vavra"

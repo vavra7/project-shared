@@ -29,12 +29,12 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
-      STORAGE_PASSWORD: ${STORAGE_PASSWORD}
+      STORE_PASSWORD: ${STORE_PASSWORD}
       SESSION_SECRET: ${SESSION_SECRET}
       CLIENT_URL: ${CLIENT_URL}
     depends_on:
       - db
-      - storage
+      - store
     ports:
       - '4000:4000'
 
@@ -52,13 +52,13 @@ services:
     ports:
       - '5432:5432'
 
-  storage:
+  store:
     image: redis:6
-    container_name: project-shared_storage
-    command: redis-server --requirepass ${STORAGE_PASSWORD}
+    container_name: project-shared_store
+    command: redis-server --requirepass ${STORE_PASSWORD}
     volumes:
       - type: volume
-        source: storage-data
+        source: store-data
         target: /var/lib/redis
     ports:
       - '6379:6397'
@@ -66,5 +66,5 @@ services:
 volumes:
   db-data:
     name: project-shared_db-data
-  storage-data:
-    name: project-shared_storage-data
+  store-data:
+    name: project-shared_store-data

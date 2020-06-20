@@ -1,11 +1,11 @@
-import Layout1 from '../components/layouts/layout1';
+import Layout1 from '../../components/layouts/layout1';
 import { FC } from 'react';
-import { Container } from '../components/common/gridSystem';
+import { Container } from '../../components/common/gridSystem';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { TextField } from '../components/common/inputs';
-import { RegisterMutationVariables } from '../graphql/generated/graphqlTypes';
+import { TextField } from '../../components/common/inputs';
+import { RegisterMutationVariables } from '../../graphql/generated/graphqlTypes';
 import { useMutation } from '@apollo/react-hooks';
-import { registerMutation } from '../graphql/mutation/user/register';
+import { registerMutation } from '../../graphql/mutation/user/register';
 import { object, string, ref } from 'yup';
 
 interface RegisterForm {
@@ -19,7 +19,7 @@ interface RegisterForm {
 const Register: FC = () => {
   const [callRegister] = useMutation(registerMutation, {
     onError: err => {
-      console.log('this error happened:', err);
+      console.log(err.graphQLErrors[0]);
     }
   });
 

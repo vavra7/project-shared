@@ -20,7 +20,7 @@ const L1: FC<Props> = ({ children }) => {
           <a>test</a>
         </Link>
 
-        <Link href="/register">
+        <Link href="/user/register">
           <a>register</a>
         </Link>
       </Container>

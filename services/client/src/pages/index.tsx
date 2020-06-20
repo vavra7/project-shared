@@ -10,7 +10,7 @@ interface Props {
   initialApolloState: NormalizedCacheObject | string;
 }
 
-const index: NextPage<Props> = props => {
+const Index: NextPage<Props> = props => {
   return (
     <Layout1>
       <Container>
@@ -21,7 +21,7 @@ const index: NextPage<Props> = props => {
   );
 };
 
-index.getInitialProps = async () => {
+Index.getInitialProps = async () => {
   const apolloClient = getApolloClient();
 
   await apolloClient.query({
@@ -31,4 +31,4 @@ index.getInitialProps = async () => {
   return { initialApolloState: apolloClient.cache.extract() };
 };
 
-export default index;
+export default Index;

@@ -1,19 +1,21 @@
 import {
   Entity,
   Column,
-  PrimaryGeneratedColumn,
   BaseEntity,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  BeforeInsert,
+  PrimaryColumn
 } from 'typeorm';
+import { v4 } from 'uuid';
 import { ObjectType, Field, ID } from 'type-graphql';
 
 @ObjectType()
 @Entity()
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn('uuid')
   @Field(() => ID)
-  id: number;
+  id: string;
 
   @Column('citext', { unique: true })
   @Field()
@@ -30,6 +32,9 @@ export class User extends BaseEntity {
   @Column('text')
   password: string;
 
+  @Column('bool', { default: false })
+  confirmed: boolean;
+
   @CreateDateColumn({ type: 'timestamp' })
   @Field()
   createdAt: Date;
@@ -37,4 +42,9 @@ export class User extends BaseEntity {
   @UpdateDateColumn({ type: 'timestamp' })
   @Field()
   updatedAt: Date;
+
+  @BeforeInsert()
+  generateId(): void {
+    this.id = v4();
+  }
 }

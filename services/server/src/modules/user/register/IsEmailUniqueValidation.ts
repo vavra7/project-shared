@@ -11,7 +11,7 @@ class IsEmailUniqueConstraint implements ValidatorConstraintInterface {
   async validate(email: string) {
     const user = await User.findOne({ where: { email } });
 
-    if (user) {
+    if (user && user.confirmed) {
       return false;
     } else {
       return true;
