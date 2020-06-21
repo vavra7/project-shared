@@ -1,28 +1,56 @@
-import { Container } from '../../../components/common/gridSystem';
-import { Component, ReactNode } from 'react';
+import { routes } from '@project-shared/shared';
 import { NextPageContext } from 'next';
+import { Component, ReactNode } from 'react';
+import { Container } from '../../../components/common/gridSystem';
+import Layout1 from '../../../components/layouts/layout1';
+import {
+  ConfirmUserMutation,
+  ConfirmUserMutationVariables
+} from '../../../graphql/generated/graphqlTypes';
+import { confirmUserMutation } from '../../../graphql/mutation/user/confirmUser';
+import { getApolloClient } from '../../../lib/apolloClient';
+import redirect from '../../../lib/redirect';
 
 interface InitialProps {
   token: string;
+  data: ConfirmUserMutation | null | undefined;
 }
 
 class Confirm extends Component<InitialProps> {
-  static getInitialProps = (ctx: NextPageContext): InitialProps => {
+  static async getInitialProps(ctx: NextPageContext): Promise<InitialProps> {
     const token = ctx.query.token as string;
+    const apolloClient = getApolloClient();
+    const { data } = await apolloClient.mutate<ConfirmUserMutation, ConfirmUserMutationVariables>({
+      mutation: confirmUserMutation,
+      variables: {
+        token
+      }
+    });
+
+    if (data?.confirmUser) redirect(ctx, routes.login());
+
     const initialProps: InitialProps = {
-      token
+      token,
+      data
     };
 
     return initialProps;
-  };
+  }
 
   render(): ReactNode {
     return (
-      <Container>
-        <pre>{JSON.stringify(this.props, null, 2)}</pre>
+      <Layout1>
+        <Container alignItems="center">
+          <h1>o-ou... something went wrong</h1>
 
-        <div>Confirm</div>
-      </Container>
+          <div>possible causes</div>
+          <ul>
+            <li>user already verified (login)</li>
+            <li>verifying link expired (register again)</li>
+          </ul>
+          <pre>{JSON.stringify(this.props, null, 4)}</pre>
+        </Container>
+      </Layout1>
     );
   }
 }

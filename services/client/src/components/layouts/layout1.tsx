@@ -1,6 +1,7 @@
-import { Container } from '../common/gridSystem';
-import { FC, ReactNode } from 'react';
+import { routes } from '@project-shared/shared';
 import Link from 'next/link';
+import { FC, ReactNode } from 'react';
+import { Container } from '../common/gridSystem';
 
 interface Props {
   children: ReactNode;
@@ -10,7 +11,7 @@ const L1: FC<Props> = ({ children }) => {
   return (
     <>
       <Container className="py-2" flexDirection="row" justifyContent="space-around">
-        <Link href="/">
+        <Link href={routes.home()}>
           <a>
             <i className="icon-home" /> index
           </a>
@@ -20,8 +21,12 @@ const L1: FC<Props> = ({ children }) => {
           <a>test</a>
         </Link>
 
-        <Link href="/user/register">
+        <Link href={routes.register()}>
           <a>register</a>
+        </Link>
+
+        <Link href={routes.login()}>
+          <a>login</a>
         </Link>
       </Container>
 

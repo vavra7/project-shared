@@ -65,6 +65,7 @@ services:
         target: /usr/src/app
       - type: volume
         target: /usr/src/app/services/client
+    restart: always
 
   db:
     image: postgres:12

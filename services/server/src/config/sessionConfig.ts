@@ -1,5 +1,5 @@
-import session, { SessionOptions } from 'express-session';
 import connectRedis from 'connect-redis';
+import session, { SessionOptions } from 'express-session';
 import { getStore } from '../lib/store';
 
 const RedisStore = connectRedis(session);

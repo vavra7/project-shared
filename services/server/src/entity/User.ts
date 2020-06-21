@@ -1,14 +1,14 @@
+import { Field, ID, ObjectType } from 'type-graphql';
 import {
-  Entity,
-  Column,
   BaseEntity,
-  CreateDateColumn,
-  UpdateDateColumn,
   BeforeInsert,
-  PrimaryColumn
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn
 } from 'typeorm';
 import { v4 } from 'uuid';
-import { ObjectType, Field, ID } from 'type-graphql';
 
 @ObjectType()
 @Entity()

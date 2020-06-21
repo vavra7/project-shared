@@ -1,8 +1,8 @@
+import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { ApolloClient, ApolloClientOptions } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
-import { useMemo } from 'react';
 import getConfig from 'next/config';
+import { useMemo } from 'react';
 
 const {
   serverRuntimeConfig: { gqlNetworkUrl },

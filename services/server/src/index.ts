@@ -1,16 +1,15 @@
-import 'reflect-metadata';
-import dotenv from 'dotenv';
-import express from 'express';
-import session from 'express-session';
-import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express, { Request } from 'express';
+import session from 'express-session';
+import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
-import { resolvers } from './modules/resolvers';
+import { corsConfig } from './config/corsConfig';
 import { dbConfig } from './config/dbConfig';
 import { sessionConfig } from './config/sessionConfig';
-import { corsConfig } from './config/corsConfig';
-import { Request } from 'express';
+import { resolvers } from './modules/resolvers';
 
 const PORT = 4000;
 

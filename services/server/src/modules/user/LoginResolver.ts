@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
-import { Resolver, Mutation, Arg, Ctx } from 'type-graphql';
-import { User } from '../../entity/User';
 import { Request } from 'express';
+import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
+import { User } from '../../entity/User';
 
 @Resolver()
 export class LoginResolver {

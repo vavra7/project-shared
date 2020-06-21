@@ -1,5 +1,6 @@
-import { getMailerConfig } from '../config/mailerConfig';
+import { routes } from '@project-shared/shared';
 import { createTransport, getTestMessageUrl, Transporter } from 'nodemailer';
+import { getMailerConfig } from '../config/mailerConfig';
 
 let transporter: Transporter | undefined;
 
@@ -15,7 +16,7 @@ async function getTransporter(): Promise<Transporter> {
 
 async function sendUserConfirmEmail(email: string, token: string): Promise<void> {
   const transporter = await getTransporter();
-  const url = `${process.env.CLIENT_URL}/user/confirm/${token}`;
+  const url = process.env.CLIENT_URL + routes.confirmUser(token);
   const mailOptions = {
     from: '"Fred Foo 👻" <foo@example.com>',
     to: email,

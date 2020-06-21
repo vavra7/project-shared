@@ -1,6 +1,6 @@
-import { Resolver, Query, Ctx, Authorized } from 'type-graphql';
-import { User } from '../../entity/User';
 import { Request } from 'express';
+import { Authorized, Ctx, Query, Resolver } from 'type-graphql';
+import { User } from '../../entity/User';
 
 @Resolver()
 export class MeResolver {

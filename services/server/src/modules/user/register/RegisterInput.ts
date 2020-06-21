@@ -1,5 +1,5 @@
-import { Length, IsEmail } from 'class-validator';
-import { InputType, Field } from 'type-graphql';
+import { IsEmail, Length } from 'class-validator';
+import { Field, InputType } from 'type-graphql';
 import { IsEmailUnique } from './IsEmailUniqueValidation';
 
 @InputType()

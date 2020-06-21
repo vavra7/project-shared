@@ -17,7 +17,6 @@ export type Query = {
   __typename?: 'Query';
   me?: Maybe<User>;
   user?: Maybe<User>;
-  test: User;
 };
 
 export type QueryUserArgs = {
@@ -38,6 +37,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   register: User;
   login?: Maybe<User>;
+  confirmUser: Scalars['Boolean'];
 };
 
 export type MutationRegisterArgs = {
@@ -49,12 +49,22 @@ export type MutationLoginArgs = {
   email: Scalars['String'];
 };
 
+export type MutationConfirmUserArgs = {
+  token: Scalars['String'];
+};
+
 export type RegisterInput = {
   email: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   password: Scalars['String'];
 };
+
+export type ConfirmUserMutationVariables = Exact<{
+  token: Scalars['String'];
+}>;
+
+export type ConfirmUserMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'confirmUser'>;
 
 export type RegisterMutationVariables = Exact<{
   data: RegisterInput;
@@ -67,15 +77,20 @@ export type RegisterMutation = { __typename?: 'Mutation' } & {
   >;
 };
 
-export type TestQueryVariables = Exact<{ [key: string]: never }>;
-
-export type TestQuery = { __typename?: 'Query' } & {
-  test: { __typename?: 'User' } & Pick<
-    User,
-    'id' | 'email' | 'firstName' | 'lastName' | 'createdAt' | 'updatedAt'
-  >;
-};
-
+export const ConfirmUserDocument = gql`
+  mutation ConfirmUser($token: String!) {
+    confirmUser(token: $token)
+  }
+`;
+export type ConfirmUserMutationFn = ApolloReactCommon.MutationFunction<
+  ConfirmUserMutation,
+  ConfirmUserMutationVariables
+>;
+export type ConfirmUserMutationResult = ApolloReactCommon.MutationResult<ConfirmUserMutation>;
+export type ConfirmUserMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  ConfirmUserMutation,
+  ConfirmUserMutationVariables
+>;
 export const RegisterDocument = gql`
   mutation Register($data: RegisterInput!) {
     register(data: $data) {
@@ -97,16 +112,3 @@ export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<
   RegisterMutation,
   RegisterMutationVariables
 >;
-export const TestDocument = gql`
-  query Test {
-    test {
-      id
-      email
-      firstName
-      lastName
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export type TestQueryResult = ApolloReactCommon.QueryResult<TestQuery, TestQueryVariables>;
