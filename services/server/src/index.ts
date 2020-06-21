@@ -30,7 +30,7 @@ async function main() {
 
   app.use(cors(corsConfig));
   app.use(session(sessionConfig));
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, cors: false });
   app.listen(PORT, () => console.log(`ready - started server on http://localhost:${PORT}`));
 }
 

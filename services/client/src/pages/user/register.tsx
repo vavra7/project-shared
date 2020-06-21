@@ -46,7 +46,7 @@ const Register: FC = () => {
     confirmPassword: ''
   };
 
-  const validationObject = {
+  const validationSchema = object({
     email: string().required().email(),
     firstName: string().required().min(2).max(50),
     lastName: string().required().min(2).max(50),
@@ -57,7 +57,7 @@ const Register: FC = () => {
         is: password => !!password,
         then: string().oneOf([ref('password'), undefined])
       })
-  };
+  });
 
   return (
     <Layout1>
@@ -66,30 +66,30 @@ const Register: FC = () => {
 
         <Formik
           initialValues={initialValues}
-          validationSchema={object(validationObject)}
           onSubmit={onSubmit}
+          validationSchema={validationSchema}
         >
           {({ isSubmitting }) => (
             <Form>
-              <Field name="email" placeholder="email" label="Email" component={TextField} />
-              <Field name="firstName" label="First Name" component={TextField} />
-              <Field name="lastName" label="Last Name" component={TextField} />
+              <Field component={TextField} label="Email" name="email" placeholder="email" />
+              <Field component={TextField} label="First Name" name="firstName" />
+              <Field component={TextField} label="Last Name" name="lastName" />
               <Field
+                component={TextField}
+                label="Password"
                 name="password"
                 placeholder="your password"
-                label="Password"
-                component={TextField}
                 type="password"
               />
               <Field
+                component={TextField}
+                label="Confirm Password"
                 name="confirmPassword"
                 placeholder="confirm password"
-                label="Confirm Password"
-                component={TextField}
                 type="password"
               />
 
-              <button type="submit" disabled={isSubmitting}>
+              <button disabled={isSubmitting} type="submit">
                 Submit
               </button>
             </Form>

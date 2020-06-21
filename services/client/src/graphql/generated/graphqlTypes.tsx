@@ -1,5 +1,5 @@
-import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/react-common';
+import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -35,13 +35,13 @@ export type User = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  register: User;
-  login?: Maybe<User>;
   confirmUser: Scalars['Boolean'];
+  login?: Maybe<User>;
+  register: User;
 };
 
-export type MutationRegisterArgs = {
-  data: RegisterInput;
+export type MutationConfirmUserArgs = {
+  token: Scalars['String'];
 };
 
 export type MutationLoginArgs = {
@@ -49,8 +49,8 @@ export type MutationLoginArgs = {
   email: Scalars['String'];
 };
 
-export type MutationConfirmUserArgs = {
-  token: Scalars['String'];
+export type MutationRegisterArgs = {
+  data: RegisterInput;
 };
 
 export type RegisterInput = {
@@ -66,6 +66,20 @@ export type ConfirmUserMutationVariables = Exact<{
 
 export type ConfirmUserMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'confirmUser'>;
 
+export type LoginMutationVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+export type LoginMutation = { __typename?: 'Mutation' } & {
+  login?: Maybe<
+    { __typename?: 'User' } & Pick<
+      User,
+      'id' | 'email' | 'firstName' | 'lastName' | 'createdAt' | 'updatedAt'
+    >
+  >;
+};
+
 export type RegisterMutationVariables = Exact<{
   data: RegisterInput;
 }>;
@@ -74,6 +88,17 @@ export type RegisterMutation = { __typename?: 'Mutation' } & {
   register: { __typename?: 'User' } & Pick<
     User,
     'id' | 'email' | 'firstName' | 'lastName' | 'createdAt' | 'updatedAt'
+  >;
+};
+
+export type MeQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MeQuery = { __typename?: 'Query' } & {
+  me?: Maybe<
+    { __typename?: 'User' } & Pick<
+      User,
+      'id' | 'email' | 'firstName' | 'lastName' | 'createdAt' | 'updatedAt'
+    >
   >;
 };
 
@@ -90,6 +115,27 @@ export type ConfirmUserMutationResult = ApolloReactCommon.MutationResult<Confirm
 export type ConfirmUserMutationOptions = ApolloReactCommon.BaseMutationOptions<
   ConfirmUserMutation,
   ConfirmUserMutationVariables
+>;
+export const LoginDocument = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      id
+      email
+      firstName
+      lastName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export type LoginMutationFn = ApolloReactCommon.MutationFunction<
+  LoginMutation,
+  LoginMutationVariables
+>;
+export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
+export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  LoginMutation,
+  LoginMutationVariables
 >;
 export const RegisterDocument = gql`
   mutation Register($data: RegisterInput!) {
@@ -112,3 +158,16 @@ export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<
   RegisterMutation,
   RegisterMutationVariables
 >;
+export const MeDocument = gql`
+  query Me {
+    me {
+      id
+      email
+      firstName
+      lastName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export type MeQueryResult = ApolloReactCommon.QueryResult<MeQuery, MeQueryVariables>;

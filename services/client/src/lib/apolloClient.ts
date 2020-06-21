@@ -13,6 +13,7 @@ let apolloClient: ApolloClient<NormalizedCacheObject>;
 
 const serverConfig: ApolloClientOptions<NormalizedCacheObject> = {
   link: new HttpLink({
+    credentials: 'include',
     uri: gqlNetworkUrl
   }),
   cache: new InMemoryCache(),
@@ -21,6 +22,7 @@ const serverConfig: ApolloClientOptions<NormalizedCacheObject> = {
 
 const clientConfig: ApolloClientOptions<NormalizedCacheObject> = {
   link: new HttpLink({
+    credentials: 'include',
     uri: gqlPublicUrl
   }),
   cache: new InMemoryCache(),
