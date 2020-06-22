@@ -1,5 +1,7 @@
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
-import { ApolloClient, ApolloClientOptions } from 'apollo-client';
+import { ApolloClient } from 'apollo-client';
+import { ApolloLink } from 'apollo-link';
+import { ErrorLink } from 'apollo-link-error';
 import { HttpLink } from 'apollo-link-http';
 import getConfig from 'next/config';
 import { useMemo } from 'react';
@@ -9,30 +11,26 @@ const {
   publicRuntimeConfig: { gqlPublicUrl }
 } = getConfig();
 
-let apolloClient: ApolloClient<NormalizedCacheObject>;
+let globalApolloClient: ApolloClient<NormalizedCacheObject>;
 
-const serverConfig: ApolloClientOptions<NormalizedCacheObject> = {
-  link: new HttpLink({
+function initializeApolloClient(): ApolloClient<NormalizedCacheObject> {
+  const isServer: boolean = typeof window === 'undefined';
+
+  const httpLink = new HttpLink({
     credentials: 'include',
-    uri: gqlNetworkUrl
-  }),
-  cache: new InMemoryCache(),
-  ssrMode: true
-};
+    uri: isServer ? gqlNetworkUrl : gqlPublicUrl
+  });
 
-const clientConfig: ApolloClientOptions<NormalizedCacheObject> = {
-  link: new HttpLink({
-    credentials: 'include',
-    uri: gqlPublicUrl
-  }),
-  cache: new InMemoryCache(),
-  ssrMode: false
-};
+  const errorLink = new ErrorLink(({ graphQLErrors, networkError }) => {
+    console.log('graphQLErrors', graphQLErrors);
+    console.log('networkError', networkError);
+  });
 
-function initializeApolloClient(
-  config: ApolloClientOptions<NormalizedCacheObject>
-): ApolloClient<NormalizedCacheObject> {
-  return new ApolloClient(config);
+  return new ApolloClient({
+    link: ApolloLink.from([errorLink, httpLink]),
+    cache: new InMemoryCache(),
+    ssrMode: isServer
+  });
 }
 
 /**
@@ -44,18 +42,19 @@ export function getApolloClient(
 ): ApolloClient<NormalizedCacheObject> {
   const isServer: boolean = typeof window === 'undefined';
 
-  const _apolloClient =
-    apolloClient ?? initializeApolloClient(isServer ? serverConfig : clientConfig);
+  if (isServer) {
+    return initializeApolloClient();
+  } else {
+    globalApolloClient = globalApolloClient || initializeApolloClient();
 
-  if (initialState) {
-    _apolloClient.cache.restore(initialState);
+    if (initialState) globalApolloClient.cache.restore(initialState);
+
+    return globalApolloClient;
   }
-
-  return _apolloClient;
 }
 
 /**
- * Wraps get client function in useMemo for use in
+ * Wraps getApolloClient function in useMemo for use in
  * custom app file like context.
  */
 export function useApollo(
