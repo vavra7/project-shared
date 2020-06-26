@@ -6,7 +6,7 @@ import { useApollo } from '../lib/apolloClient';
 import '../styles/styles.scss';
 
 function Client({ Component, pageProps }: AppProps): ReactElement {
-  const apolloClient = useApollo(pageProps.initialApolloState);
+  const apolloClient = useApollo(pageProps.pageInitialState);
 
   return (
     <ApolloProvider client={apolloClient}>

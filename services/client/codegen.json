@@ -1,10 +1,24 @@
 {
   "overwrite": true,
-  "schema": "http://server:4000/graphql",
-  "documents": "src/graphql/**/*.ts",
   "generates": {
-    "src/graphql/generated/graphqlTypes.tsx": {
+    "src/graphql/user/types.tsx": {
+      "schema": "http://localhost:4000/graphql",
       "plugins": ["typescript", "typescript-operations", "typescript-react-apollo"],
+      "documents": "src/graphql/user/**/*.ts",
+      "config": {
+        "withComponent": false,
+        "withHOC": false
+      }
+    },
+    "src/graphql/store/types.tsx": {
+      "schema": "src/store/typeDefs.ts",
+      "plugins": [
+        "typescript",
+        "typescript-operations",
+        "typescript-react-apollo",
+        "typescript-resolvers"
+      ],
+      "documents": "src/graphql/store/**/*.ts",
       "config": {
         "withComponent": false,
         "withHOC": false

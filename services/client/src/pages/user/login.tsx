@@ -7,13 +7,9 @@ import { object, string } from 'yup';
 import { Container } from '../../components/common/gridSystem';
 import { TextField } from '../../components/common/inputs';
 import Layout1 from '../../components/layouts/layout1';
-import {
-  LoginMutation,
-  LoginMutationVariables,
-  MeQuery
-} from '../../graphql/generated/graphqlTypes';
-import { loginMutation } from '../../graphql/mutation/user/login';
-import { meQuery } from '../../graphql/query/user/me';
+import { loginMutation } from '../../graphql/user/mutation/login';
+import { meQuery } from '../../graphql/user/query/me';
+import { LoginMutation, LoginMutationVariables, MeQuery } from '../../graphql/user/types';
 
 type LoginForm = LoginMutationVariables;
 

@@ -5,6 +5,7 @@ import { ErrorLink } from 'apollo-link-error';
 import { HttpLink } from 'apollo-link-http';
 import getConfig from 'next/config';
 import { useMemo } from 'react';
+import { initialState, resolvers, typeDefs } from '../store';
 
 const {
   serverRuntimeConfig: { gqlNetworkUrl },
@@ -26,41 +27,50 @@ function initializeApolloClient(): ApolloClient<NormalizedCacheObject> {
     console.log('networkError', networkError);
   });
 
+  const cache = new InMemoryCache();
+
   return new ApolloClient({
     link: ApolloLink.from([errorLink, httpLink]),
-    cache: new InMemoryCache(),
-    ssrMode: isServer
+    cache,
+    ssrMode: isServer,
+    typeDefs,
+    resolvers: resolvers as any
   });
 }
 
-/**
- * Checks if exists Apollo client otherwise initialize it.
- * Also restore initial cache from SSR
- */
 export function getApolloClient(
-  initialState?: NormalizedCacheObject
+  pageInitialState?: NormalizedCacheObject
 ): ApolloClient<NormalizedCacheObject> {
   const isServer: boolean = typeof window === 'undefined';
 
   if (isServer) {
-    return initializeApolloClient();
-  } else {
-    globalApolloClient = globalApolloClient || initializeApolloClient();
+    const apolloClient = initializeApolloClient();
+    apolloClient.cache.writeData({
+      data: initialState
+    });
 
-    if (initialState) globalApolloClient.cache.restore(initialState);
+    return apolloClient;
+  } else {
+    if (!globalApolloClient) {
+      globalApolloClient = initializeApolloClient();
+
+      if (pageInitialState) {
+        globalApolloClient.cache.restore(pageInitialState);
+      }
+
+      globalApolloClient.cache.writeData({
+        data: initialState
+      });
+    }
 
     return globalApolloClient;
   }
 }
 
-/**
- * Wraps getApolloClient function in useMemo for use in
- * custom app file like context.
- */
 export function useApollo(
-  initialState?: NormalizedCacheObject
+  pageInitialState?: NormalizedCacheObject
 ): ApolloClient<NormalizedCacheObject> {
-  const contextClient = useMemo(() => getApolloClient(initialState), [initialState]);
+  const contextClient = useMemo(() => getApolloClient(pageInitialState), [pageInitialState]);
 
   return contextClient;
 }

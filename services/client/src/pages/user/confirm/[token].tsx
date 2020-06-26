@@ -3,11 +3,8 @@ import { NextPageContext } from 'next';
 import { Component, ReactNode } from 'react';
 import { Container } from '../../../components/common/gridSystem';
 import Layout1 from '../../../components/layouts/layout1';
-import {
-  ConfirmUserMutation,
-  ConfirmUserMutationVariables
-} from '../../../graphql/generated/graphqlTypes';
-import { confirmUserMutation } from '../../../graphql/mutation/user/confirmUser';
+import { confirmUserMutation } from '../../../graphql/user/mutation/confirmUser';
+import { ConfirmUserMutation, ConfirmUserMutationVariables } from '../../../graphql/user/types';
 import { getApolloClient } from '../../../lib/apolloClient';
 import redirect from '../../../lib/redirect';
 
