@@ -5,7 +5,9 @@ import { ErrorLink } from 'apollo-link-error';
 import { HttpLink } from 'apollo-link-http';
 import getConfig from 'next/config';
 import { useMemo } from 'react';
+import { AlertType } from '../graphql/store/types';
 import { initialState, resolvers, typeDefs } from '../store';
+import alerts from './alerts';
 
 const {
   serverRuntimeConfig: { gqlNetworkUrl },
@@ -23,8 +25,16 @@ function initializeApolloClient(): ApolloClient<NormalizedCacheObject> {
   });
 
   const errorLink = new ErrorLink(({ graphQLErrors, networkError }) => {
-    console.log('graphQLErrors', graphQLErrors);
-    console.log('networkError', networkError);
+    if (graphQLErrors) {
+      alerts.add({
+        title: graphQLErrors[0].extensions ? graphQLErrors[0].extensions.code : '',
+        body: graphQLErrors[0].message,
+        icon: 'icon-home',
+        type: AlertType.Error
+      });
+    } else {
+      console.error('networkError', networkError);
+    }
   });
 
   const cache = new InMemoryCache();

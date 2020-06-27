@@ -14,77 +14,131 @@ export type Scalars = {
   Float: number;
 };
 
-export type FlashMessage = {
-  __typename?: 'FlashMessage';
-  id: Scalars['ID'];
+export enum AlertType {
+  Error = 'ERROR',
+  Success = 'SUCCESS',
+  Info = 'INFO'
+}
+
+export type AlertInput = {
+  title?: Maybe<Scalars['String']>;
   body: Scalars['String'];
+  icon?: Maybe<Scalars['String']>;
+  type: AlertType;
+};
+
+export type Alert = {
+  __typename?: 'Alert';
+  id: Scalars['ID'];
+  title?: Maybe<Scalars['String']>;
+  body: Scalars['String'];
+  icon?: Maybe<Scalars['String']>;
+  type: AlertType;
   display: Scalars['Boolean'];
-  timestamp?: Maybe<Scalars['String']>;
+  timestamp: Scalars['String'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  flashMessages: Array<Maybe<FlashMessage>>;
+  alerts: Array<Maybe<Alert>>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addFlashMessage?: Maybe<Scalars['Boolean']>;
+  addAlert?: Maybe<Alert>;
+  hideAlert: Scalars['Boolean'];
 };
 
-export type MutationAddFlashMessageArgs = {
-  body: Scalars['String'];
+export type MutationAddAlertArgs = {
+  inputData: AlertInput;
 };
 
-export type AddFlashMessageMutationVariables = Exact<{
-  body: Scalars['String'];
+export type MutationHideAlertArgs = {
+  id: Scalars['ID'];
+};
+
+export type AddAlertMutationVariables = Exact<{
+  inputData: AlertInput;
 }>;
 
-export type AddFlashMessageMutation = { __typename?: 'Mutation' } & Pick<
-  Mutation,
-  'addFlashMessage'
->;
-
-export type FlashMessagesQueryVariables = Exact<{ [key: string]: never }>;
-
-export type FlashMessagesQuery = { __typename?: 'Query' } & {
-  flashMessages: Array<
-    Maybe<
-      { __typename?: 'FlashMessage' } & Pick<FlashMessage, 'id' | 'body' | 'display' | 'timestamp'>
+export type AddAlertMutation = { __typename?: 'Mutation' } & {
+  addAlert?: Maybe<
+    { __typename?: 'Alert' } & Pick<
+      Alert,
+      'id' | 'title' | 'body' | 'icon' | 'type' | 'display' | 'timestamp'
     >
   >;
 };
 
-export const AddFlashMessageDocument = gql`
-  mutation AddFlashMessage($body: String!) {
-    addFlashMessage(body: $body) @client
-  }
-`;
-export type AddFlashMessageMutationFn = ApolloReactCommon.MutationFunction<
-  AddFlashMessageMutation,
-  AddFlashMessageMutationVariables
->;
-export type AddFlashMessageMutationResult = ApolloReactCommon.MutationResult<
-  AddFlashMessageMutation
->;
-export type AddFlashMessageMutationOptions = ApolloReactCommon.BaseMutationOptions<
-  AddFlashMessageMutation,
-  AddFlashMessageMutationVariables
->;
-export const FlashMessagesDocument = gql`
-  query FlashMessages {
-    flashMessages {
+export type HideAlertMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type HideAlertMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'hideAlert'>;
+
+export type AlertsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type AlertsQuery = { __typename?: 'Query' } & {
+  alerts: Array<
+    Maybe<
+      { __typename?: 'Alert' } & Pick<
+        Alert,
+        'id' | 'title' | 'body' | 'icon' | 'type' | 'display' | 'timestamp'
+      >
+    >
+  >;
+};
+
+export const AddAlertDocument = gql`
+  mutation AddAlert($inputData: AlertInput!) {
+    addAlert(inputData: $inputData) @client {
       id
+      title
       body
+      icon
+      type
       display
       timestamp
     }
   }
 `;
-export type FlashMessagesQueryResult = ApolloReactCommon.QueryResult<
-  FlashMessagesQuery,
-  FlashMessagesQueryVariables
+export type AddAlertMutationFn = ApolloReactCommon.MutationFunction<
+  AddAlertMutation,
+  AddAlertMutationVariables
 >;
+export type AddAlertMutationResult = ApolloReactCommon.MutationResult<AddAlertMutation>;
+export type AddAlertMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  AddAlertMutation,
+  AddAlertMutationVariables
+>;
+export const HideAlertDocument = gql`
+  mutation HideAlert($id: ID!) {
+    hideAlert(id: $id) @client
+  }
+`;
+export type HideAlertMutationFn = ApolloReactCommon.MutationFunction<
+  HideAlertMutation,
+  HideAlertMutationVariables
+>;
+export type HideAlertMutationResult = ApolloReactCommon.MutationResult<HideAlertMutation>;
+export type HideAlertMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  HideAlertMutation,
+  HideAlertMutationVariables
+>;
+export const AlertsDocument = gql`
+  query Alerts {
+    alerts {
+      id
+      title
+      body
+      icon
+      type
+      display
+      timestamp
+    }
+  }
+`;
+export type AlertsQueryResult = ApolloReactCommon.QueryResult<AlertsQuery, AlertsQueryVariables>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -178,9 +232,11 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  FlashMessage: ResolverTypeWrapper<FlashMessage>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
+  AlertType: AlertType;
+  AlertInput: AlertInput;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Alert: ResolverTypeWrapper<Alert>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Query: ResolverTypeWrapper<{}>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -188,22 +244,26 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  FlashMessage: FlashMessage;
-  ID: Scalars['ID'];
+  AlertInput: AlertInput;
   String: Scalars['String'];
+  Alert: Alert;
+  ID: Scalars['ID'];
   Boolean: Scalars['Boolean'];
   Query: {};
   Mutation: {};
 };
 
-export type FlashMessageResolvers<
+export type AlertResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['FlashMessage'] = ResolversParentTypes['FlashMessage']
+  ParentType extends ResolversParentTypes['Alert'] = ResolversParentTypes['Alert']
 > = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['AlertType'], ParentType, ContextType>;
   display?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  timestamp?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
@@ -211,23 +271,29 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
-  flashMessages?: Resolver<Array<Maybe<ResolversTypes['FlashMessage']>>, ParentType, ContextType>;
+  alerts?: Resolver<Array<Maybe<ResolversTypes['Alert']>>, ParentType, ContextType>;
 };
 
 export type MutationResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
 > = {
-  addFlashMessage?: Resolver<
-    Maybe<ResolversTypes['Boolean']>,
+  addAlert?: Resolver<
+    Maybe<ResolversTypes['Alert']>,
     ParentType,
     ContextType,
-    RequireFields<MutationAddFlashMessageArgs, 'body'>
+    RequireFields<MutationAddAlertArgs, 'inputData'>
+  >;
+  hideAlert?: Resolver<
+    ResolversTypes['Boolean'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationHideAlertArgs, 'id'>
   >;
 };
 
 export type Resolvers<ContextType = any> = {
-  FlashMessage?: FlashMessageResolvers<ContextType>;
+  Alert?: AlertResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
 };

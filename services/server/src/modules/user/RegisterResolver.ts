@@ -8,7 +8,7 @@ import { setUpConfirmation } from './register/setUpConfirmation';
 export class RegisterResolver {
   @Mutation(() => User)
   async register(
-    @Arg('data') { email, firstName, lastName, password }: RegisterInput
+    @Arg('inputData') { email, firstName, lastName, password }: RegisterInput
   ): Promise<User> {
     let user: User | undefined;
 

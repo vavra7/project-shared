@@ -1,18 +1,38 @@
 import gql from 'graphql-tag';
 
 export const typeDefs = gql`
-  type FlashMessage {
-    id: ID!
+  enum AlertType {
+    ERROR
+    SUCCESS
+    INFO
+  }
+
+  input AlertInput {
+    title: String
     body: String!
+    icon: String
+    type: AlertType!
+  }
+
+  type Alert {
+    id: ID!
+    title: String
+    body: String!
+    icon: String
+    type: AlertType!
     display: Boolean!
-    timestamp: String
+    timestamp: String!
   }
 
   type Query {
-    flashMessages: [FlashMessage]!
+    alerts: [Alert]!
   }
 
   type Mutation {
-    addFlashMessage(body: String!): Boolean
+    addAlert(inputData: AlertInput!): Alert
+  }
+
+  type Mutation {
+    hideAlert(id: ID!): Boolean!
   }
 `;

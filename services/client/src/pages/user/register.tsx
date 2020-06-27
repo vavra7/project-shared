@@ -25,7 +25,7 @@ const Register: FC = () => {
 
   const onSubmit = async (data: RegisterForm, { resetForm }: FormikHelpers<any>) => {
     const variables: RegisterMutationVariables = {
-      data: {
+      inputData: {
         email: data.email,
         firstName: data.firstName,
         lastName: data.lastName,

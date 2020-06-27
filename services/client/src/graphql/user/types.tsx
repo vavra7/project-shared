@@ -20,7 +20,7 @@ export type Query = {
 };
 
 export type QueryUserArgs = {
-  id: Scalars['Float'];
+  id: Scalars['String'];
 };
 
 export type User = {
@@ -50,7 +50,7 @@ export type MutationLoginArgs = {
 };
 
 export type MutationRegisterArgs = {
-  data: RegisterInput;
+  inputData: RegisterInput;
 };
 
 export type RegisterInput = {
@@ -81,7 +81,7 @@ export type LoginMutation = { __typename?: 'Mutation' } & {
 };
 
 export type RegisterMutationVariables = Exact<{
-  data: RegisterInput;
+  inputData: RegisterInput;
 }>;
 
 export type RegisterMutation = { __typename?: 'Mutation' } & {
@@ -138,8 +138,8 @@ export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<
   LoginMutationVariables
 >;
 export const RegisterDocument = gql`
-  mutation Register($data: RegisterInput!) {
-    register(data: $data) {
+  mutation Register($inputData: RegisterInput!) {
+    register(inputData: $inputData) {
       id
       email
       firstName
