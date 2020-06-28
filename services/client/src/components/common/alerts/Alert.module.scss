@@ -7,7 +7,7 @@
   color: #ffffff;
   border-radius: $border-radius;
   @include ma-(3);
-  width: 300px;
+  width: 350px;
   max-width: calc(100% - #{map-get($spaces, 3) * 2});
   font-size: 0.9em;
   @include elevate;

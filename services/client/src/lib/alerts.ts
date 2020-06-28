@@ -21,7 +21,6 @@ export default {
     return data!.addAlert!;
   },
   hide: async (id: Alert['id']): Promise<boolean> => {
-    console.log(id);
     const apolloClient = getApolloClient();
     const { data } = await apolloClient.mutate<HideAlertMutation, HideAlertMutationVariables>({
       mutation: hideAlertMutation,

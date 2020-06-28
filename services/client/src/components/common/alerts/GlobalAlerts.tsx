@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
+import { AnimatePresence } from 'framer-motion';
 import { FC } from 'react';
 import { alertsQuery } from '../../../graphql/store/query/alerts';
 import { AlertsQuery } from '../../../graphql/store/types';
@@ -15,9 +16,11 @@ const GlobalAlerts: FC = () => {
 
   return (
     <div className="global-alerts p-fixed" id="global-alerts" style={style}>
-      {displayedAlerts.map(alert => (
-        <Alert {...(alert as any)} key={'alert_' + alert!.id} />
-      ))}
+      <AnimatePresence>
+        {displayedAlerts.map(alert => (
+          <Alert {...(alert as any)} key={'alert_' + alert!.id} />
+        ))}
+      </AnimatePresence>
     </div>
   );
 };

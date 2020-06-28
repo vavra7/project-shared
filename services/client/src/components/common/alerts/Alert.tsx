@@ -1,3 +1,4 @@
+import { motion, Point } from 'framer-motion';
 import { PureComponent, ReactNode } from 'react';
 import { Alert as AlertObjectType, AlertType } from '../../../graphql/store/types';
 import alerts from '../../../lib/alerts';
@@ -7,6 +8,7 @@ type AlertProps = AlertObjectType;
 
 class Alert extends PureComponent<AlertProps> {
   private modifierClass: string;
+  private swipeConfidenceThreshold = 20000;
 
   constructor(props: AlertProps) {
     super(props);
@@ -27,11 +29,33 @@ class Alert extends PureComponent<AlertProps> {
     }
   }
 
+  getSwipePower(offset: number, velocity: number): number {
+    return Math.abs(offset) * velocity;
+  }
+
+  out(offset: Point, velocity: Point): void {
+    const swipePower = this.getSwipePower(offset.x, velocity.x);
+
+    if (swipePower > this.swipeConfidenceThreshold) {
+      console.log('out', swipePower);
+    }
+  }
   render(): ReactNode {
     const { body, icon, title, id } = this.props;
 
     return (
-      <div className={`alert ${scopedStyles['alert']} ${this.modifierClass}`}>
+      <motion.div
+        animate={{ opacity: 1 }}
+        className={`alert ${scopedStyles['alert']} ${this.modifierClass}`}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={1}
+        exit={{ opacity: 0, x: '100%' }}
+        initial={{ opacity: 0 }}
+        onDragEnd={(e, { offset, velocity }) => this.out(offset, velocity)}
+        positionTransition
+        whileTap={{ scale: 0.97 }}
+      >
         <div className={`alert__loader ${scopedStyles['alert__loader']}`} />
 
         {icon && (
@@ -49,7 +73,7 @@ class Alert extends PureComponent<AlertProps> {
         <div className={`alert__close ${scopedStyles['alert__close']}`}>
           <i className="icon-times" onClick={() => alerts.hide(id)} />
         </div>
-      </div>
+      </motion.div>
     );
   }
 }
