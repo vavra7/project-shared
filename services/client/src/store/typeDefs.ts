@@ -8,16 +8,16 @@ export const typeDefs = gql`
   }
 
   input AlertInput {
-    title: String
-    body: String!
+    title: String!
+    body: String
     icon: String
     type: AlertType!
   }
 
   type Alert {
     id: ID!
-    title: String
-    body: String!
+    title: String!
+    body: String
     icon: String
     type: AlertType!
     display: Boolean!

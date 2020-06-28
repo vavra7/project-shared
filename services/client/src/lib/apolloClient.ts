@@ -29,7 +29,7 @@ function initializeApolloClient(): ApolloClient<NormalizedCacheObject> {
       alerts.add({
         title: graphQLErrors[0].extensions ? graphQLErrors[0].extensions.code : '',
         body: graphQLErrors[0].message,
-        icon: 'icon-home',
+        icon: 'icon-exclamation-circle',
         type: AlertType.Error
       });
     } else {

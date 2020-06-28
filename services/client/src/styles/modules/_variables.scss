@@ -1,3 +1,6 @@
+$base-size: 15px;
+
+// grid system
 $xs: 0px;
 $sm: 600px;
 $md: 960px;
@@ -24,3 +27,21 @@ $breakpoints-max: (
 	'lg': $xl - 1,
 	'xl': 99999px
 );
+
+// spacing
+$spaces: (
+  0: $base-size * 0,
+  1: $base-size * 0.25,
+  2: $base-size * 0.5,
+  3: $base-size * 1,
+  4: $base-size * 1.5,
+  5: $base-size * 3
+);
+
+// colors
+$success: #41bc9c;
+$info: #f7b84b;
+$error: #f1556c;
+
+// design
+$border-radius: 4px;

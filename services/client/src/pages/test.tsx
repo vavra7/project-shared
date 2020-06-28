@@ -10,9 +10,9 @@ import { AlertInput, AlertType } from '../graphql/store/types';
 import { getApolloClient } from '../lib/apolloClient';
 
 const inputAlert: AlertInput = {
-  title: 'Title',
+  title: 'Title ds fds dsf asdf s',
   body: 'Body',
-  type: AlertType.Error,
+  type: AlertType.Success,
   icon: 'icon-home'
 };
 

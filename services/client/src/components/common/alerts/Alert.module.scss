@@ -1,0 +1,78 @@
+@import '../../../styles/modules/variables';
+@import '../../../styles//modules/mixins';
+
+.alert {
+  display: flex;
+  position: relative;
+  color: rgb(255, 255, 255);
+  border-radius: $border-radius;
+  @include ma-3;
+  width: 300px;
+  max-width: calc(100% - #{map-get($spaces, 3) * 2});
+  font-size: 0.9em;
+
+  &__loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 75%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.541);
+  }
+
+  &__icon {
+    @include pt-3;
+    @include pb-3;
+    @include pl-3;
+
+    & i {
+      font-size: 22px;
+    }
+  }
+
+  &__content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    @include pa-3;
+    overflow: hidden;
+
+    & .title {
+      font-weight: bolder;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+
+    & .body {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+      @include mt-2;
+    }
+  }
+
+  &__close {
+    i {
+      @include pt-1;
+      @include pr-2;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+  }
+
+  &--success {
+    background: $success;
+  }
+
+  &--info {
+    background: $info;
+  }
+
+  &--error {
+    background: $error;
+  }
+}

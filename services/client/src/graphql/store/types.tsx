@@ -21,8 +21,8 @@ export enum AlertType {
 }
 
 export type AlertInput = {
-  title?: Maybe<Scalars['String']>;
-  body: Scalars['String'];
+  title: Scalars['String'];
+  body?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
   type: AlertType;
 };
@@ -30,8 +30,8 @@ export type AlertInput = {
 export type Alert = {
   __typename?: 'Alert';
   id: Scalars['ID'];
-  title?: Maybe<Scalars['String']>;
-  body: Scalars['String'];
+  title: Scalars['String'];
+  body?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
   type: AlertType;
   display: Scalars['Boolean'];
@@ -258,8 +258,8 @@ export type AlertResolvers<
   ParentType extends ResolversParentTypes['Alert'] = ResolversParentTypes['Alert']
 > = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  body?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<ResolversTypes['AlertType'], ParentType, ContextType>;
   display?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
