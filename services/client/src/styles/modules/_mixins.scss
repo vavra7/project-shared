@@ -1,34 +1,68 @@
 @import './variables';
 
 // spacing
-@mixin pt-1 {
-  padding-top: map-get($spaces, 1);
+@mixin ma-($space) {
+  margin: map-get($spaces, $space);
 }
 
-@mixin mt-2 {
-  margin-top: map-get($spaces, 2);
+@mixin mx-($space) {
+  margin-left: map-get($spaces, $space);
+  margin-right: map-get($spaces, $space);
 }
 
-@mixin pr-2 {
-  padding-right: map-get($spaces, 2);
+@mixin my-($space) {
+  margin-top: map-get($spaces, $space);
+  margin-bottom: map-get($spaces, $space);
 }
 
-@mixin ma-3 {
-  margin: map-get($spaces, 3);
+@mixin mt-($space) {
+  margin-top: map-get($spaces, $space);
 }
 
-@mixin pa-3 {
-  padding: map-get($spaces, 3);
+@mixin mr-($space) {
+  margin-right: map-get($spaces, $space);
 }
 
-@mixin pt-3 {
-  padding-top: map-get($spaces, 3);
+@mixin mb-($space) {
+  margin-bottom: map-get($spaces, $space);
 }
 
-@mixin pb-3 {
-  padding-bottom: map-get($spaces, 3);
+@mixin ml-($space) {
+  margin-left: map-get($spaces, $space);
 }
 
-@mixin pl-3 {
-  padding-left: map-get($spaces, 3);
+@mixin pa-($space) {
+  padding: map-get($spaces, $space);
+}
+
+@mixin px-($space) {
+  padding-left: map-get($spaces, $space);
+  padding-right: map-get($spaces, $space);
+}
+
+@mixin py-($space) {
+  padding-top: map-get($spaces, $space);
+  padding-bottom: map-get($spaces, $space);
+}
+
+@mixin pt-($space) {
+  padding-top: map-get($spaces, $space);
+}
+
+@mixin pr-($space) {
+  padding-right: map-get($spaces, $space);
+}
+
+@mixin pb-($space) {
+  padding-bottom: map-get($spaces, $space);
+}
+
+@mixin pl-($space) {
+  padding-left: map-get($spaces, $space);
+}
+
+//design
+@mixin elevate {
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12);
 }

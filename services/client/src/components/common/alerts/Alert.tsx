@@ -1,5 +1,6 @@
 import { PureComponent, ReactNode } from 'react';
 import { Alert as AlertObjectType, AlertType } from '../../../graphql/store/types';
+import alerts from '../../../lib/alerts';
 import scopedStyles from './Alert.module.scss';
 
 type AlertProps = AlertObjectType;
@@ -27,7 +28,7 @@ class Alert extends PureComponent<AlertProps> {
   }
 
   render(): ReactNode {
-    const { body, icon, title } = this.props;
+    const { body, icon, title, id } = this.props;
 
     return (
       <div className={`alert ${scopedStyles['alert']} ${this.modifierClass}`}>
@@ -46,7 +47,7 @@ class Alert extends PureComponent<AlertProps> {
         </div>
 
         <div className={`alert__close ${scopedStyles['alert__close']}`}>
-          <i className="icon-times" />
+          <i className="icon-times" onClick={() => alerts.hide(id)} />
         </div>
       </div>
     );

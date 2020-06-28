@@ -4,12 +4,13 @@
 .alert {
   display: flex;
   position: relative;
-  color: rgb(255, 255, 255);
+  color: #ffffff;
   border-radius: $border-radius;
-  @include ma-3;
+  @include ma-(3);
   width: 300px;
   max-width: calc(100% - #{map-get($spaces, 3) * 2});
   font-size: 0.9em;
+  @include elevate;
 
   &__loader {
     position: absolute;
@@ -21,9 +22,9 @@
   }
 
   &__icon {
-    @include pt-3;
-    @include pb-3;
-    @include pl-3;
+    @include pt-(3);
+    @include pb-(3);
+    @include pl-(3);
 
     & i {
       font-size: 22px;
@@ -35,7 +36,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    @include pa-3;
+    @include pa-(3);
     overflow: hidden;
 
     & .title {
@@ -51,14 +52,14 @@
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
       overflow: hidden;
-      @include mt-2;
+      @include mt-(2);
     }
   }
 
   &__close {
     i {
-      @include pt-1;
-      @include pr-2;
+      @include pt-(1);
+      @include pr-(2);
       font-size: 1.2em;
       cursor: pointer;
     }
