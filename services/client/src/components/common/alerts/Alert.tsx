@@ -38,6 +38,7 @@ class Alert extends PureComponent<AlertProps> {
 
     if (swipePower > this.swipeConfidenceThreshold) {
       console.log('out', swipePower);
+      // alerts.hide(this.props.id);
     }
   }
   render(): ReactNode {
@@ -45,18 +46,24 @@ class Alert extends PureComponent<AlertProps> {
 
     return (
       <motion.div
-        animate={{ opacity: 1 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
         className={`alert ${scopedStyles['alert']} ${this.modifierClass}`}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={1}
         exit={{ opacity: 0, x: '100%' }}
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 0, y: -50, scale: 0.5 }}
         onDragEnd={(e, { offset, velocity }) => this.out(offset, velocity)}
         positionTransition
         whileTap={{ scale: 0.97 }}
       >
-        <div className={`alert__loader ${scopedStyles['alert__loader']}`} />
+        <motion.div
+          animate={{ width: '100%' }}
+          className={`alert__loader ${scopedStyles['alert__loader']}`}
+          initial={{ width: '0%' }}
+          onAnimationComplete={() => alerts.hide(id)}
+          transition={{ duration: 5, ease: 'linear', type: 'tween' }}
+        />
 
         {icon && (
           <div className={`alert__icon ${scopedStyles['alert__icon']}`}>
