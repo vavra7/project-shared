@@ -12,13 +12,13 @@
   font-size: 0.9em;
   @include elevate;
 
-  &__loader {
+  &__expirer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 75%;
+    width: 0%;
     height: 4px;
-    background: rgba(255, 255, 255, 0.541);
+    background: rgba(255, 255, 255, 0.4);
   }
 
   &__icon {

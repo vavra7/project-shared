@@ -6,6 +6,7 @@
     "esnext",
     "formik",
     "inmemory",
+    "mixins",
     "overscroll",
     "postgres",
     "postgresql",
