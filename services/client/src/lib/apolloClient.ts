@@ -1,10 +1,11 @@
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
+import { setContext } from 'apollo-link-context';
 import { ErrorLink } from 'apollo-link-error';
 import { HttpLink } from 'apollo-link-http';
+import { IncomingHttpHeaders } from 'http';
 import getConfig from 'next/config';
-import { useMemo } from 'react';
 import { AlertType } from '../graphql/store/types';
 import { initialState, resolvers, typeDefs } from '../store';
 import alerts from './alerts';
@@ -14,10 +15,23 @@ const {
   publicRuntimeConfig: { gqlPublicUrl }
 } = getConfig();
 
+let cookie: IncomingHttpHeaders['cookie'];
 let globalApolloClient: ApolloClient<NormalizedCacheObject>;
+
+export function setNetworkCookie(_cookie: IncomingHttpHeaders['cookie']) {
+  cookie = _cookie;
+}
 
 function initializeApolloClient(): ApolloClient<NormalizedCacheObject> {
   const isServer: boolean = typeof window === 'undefined';
+
+  const contextLink = setContext(() => {
+    return {
+      headers: {
+        cookie
+      }
+    };
+  });
 
   const httpLink = new HttpLink({
     credentials: 'include',
@@ -40,7 +54,7 @@ function initializeApolloClient(): ApolloClient<NormalizedCacheObject> {
   const cache = new InMemoryCache();
 
   return new ApolloClient({
-    link: ApolloLink.from([errorLink, httpLink]),
+    link: ApolloLink.from([errorLink, contextLink, httpLink]),
     cache,
     ssrMode: isServer,
     typeDefs,
@@ -75,12 +89,4 @@ export function getApolloClient(
 
     return globalApolloClient;
   }
-}
-
-export function useApollo(
-  pageInitialState?: NormalizedCacheObject
-): ApolloClient<NormalizedCacheObject> {
-  const contextClient = useMemo(() => getApolloClient(pageInitialState), [pageInitialState]);
-
-  return contextClient;
 }

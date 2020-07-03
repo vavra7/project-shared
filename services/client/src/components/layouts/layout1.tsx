@@ -28,6 +28,10 @@ const L1: FC<Props> = ({ children }) => {
         <Link href={routes.login()}>
           <a>login</a>
         </Link>
+
+        <Link href={routes.profile()}>
+          <a>profile</a>
+        </Link>
       </Container>
 
       <div className="mt-3">{children}</div>

@@ -6,7 +6,7 @@ import Layout1 from '../../../components/layouts/layout1';
 import { confirmUserMutation } from '../../../graphql/user/mutation/confirmUser';
 import { ConfirmUserMutation, ConfirmUserMutationVariables } from '../../../graphql/user/types';
 import { getApolloClient } from '../../../lib/apolloClient';
-import redirect from '../../../lib/redirect';
+import { redirect } from '../../../lib/redirect';
 
 interface InitialProps {
   token: string;

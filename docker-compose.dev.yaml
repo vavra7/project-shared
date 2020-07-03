@@ -19,6 +19,7 @@ services:
   client:
     image: vavra/dev_project-shared_client
     container_name: dev_project-shared_client
+    user: 1000:1000
     build:
       context: ./
       dockerfile: ./services/client/Dockerfile.dev

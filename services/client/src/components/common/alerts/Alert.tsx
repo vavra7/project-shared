@@ -11,17 +11,14 @@ const ALERT_WIDTH = 350;
 const variants = {
   alert: {
     initial: {
-      opacity: 0,
       y: -50,
       scale: 0.5
     },
     animate: {
-      opacity: 1,
       y: 0,
       scale: 1
     },
     exit: {
-      opacity: 0,
       x: '100%'
     }
   },
@@ -32,7 +29,7 @@ const variants = {
     expire: {
       width: '100%',
       transition: {
-        duration: 4,
+        duration: 5,
         ease: 'linear',
         type: 'tween'
       }
