@@ -7,10 +7,10 @@ import { addAlertMutation } from '../graphql/store/mutation/addAlert';
 import { hideAlertMutation } from '../graphql/store/mutation/hideAlert';
 import { alertsQuery } from '../graphql/store/query/alerts';
 import { AlertInput, AlertType } from '../graphql/store/types';
-import { getApolloClient } from '../lib/apolloClient';
+import Apollo from '../lib/apollo';
 
 const inputAlert: AlertInput = {
-  title: 'Title ds fds dsf asdf s',
+  title: 'Test Alert',
   body: 'Body',
   type: AlertType.Success,
   icon: 'icon-home'
@@ -41,14 +41,15 @@ const Test: NextPage = props => {
   );
 };
 
+//#region [Initial]
 Test.getInitialProps = async () => {
-  const apolloClient = getApolloClient();
+  const apolloClient = Apollo.getClient();
 
   await apolloClient.query({
     errorPolicy: 'none',
     query: gql`
       query {
-        user(id: "1d1aeea4-a81f-490c-bab5-d66808c4289e") {
+        user(id: "df9b6a39-129d-480d-81f7-ded989fa4eca") {
           id
           email
           firstName
@@ -61,8 +62,9 @@ Test.getInitialProps = async () => {
   });
 
   return {
-    pageInitialState: apolloClient.extract()
+    apolloCache: apolloClient.extract()
   };
 };
+//#endregion
 
 export default Test;

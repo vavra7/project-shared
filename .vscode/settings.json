@@ -1,8 +1,12 @@
 {
+  "coloredRegions.namedColors": {
+    "Initial": "rgba(59, 112, 243, 0.03)"
+  },
   "cSpell.words": [],
   "cSpell.ignoreWords": [
     "citext",
     "codegen",
+    "endregion",
     "esnext",
     "formik",
     "inmemory",

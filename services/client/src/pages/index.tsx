@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { Container } from '../components/common/gridSystem';
 import Layout1 from '../components/layouts/layout1';
 import { meQuery } from '../graphql/user/query/me';
-import { getApolloClient } from '../lib/apolloClient';
+import Apollo from '../lib/apollo';
 
 interface IndexInitialProps {
   apolloCache: NormalizedCacheObject;
@@ -19,8 +19,9 @@ const Index: NextPage<IndexInitialProps> = props => {
   );
 };
 
+//#region [Initial]
 Index.getInitialProps = async () => {
-  const apolloClient = getApolloClient();
+  const apolloClient = Apollo.getClient();
   const data = await apolloClient.query({ query: meQuery });
 
   return {
@@ -28,5 +29,6 @@ Index.getInitialProps = async () => {
     data
   };
 };
+//#endregion
 
 export default Index;

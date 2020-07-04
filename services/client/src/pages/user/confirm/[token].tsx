@@ -5,7 +5,7 @@ import { Container } from '../../../components/common/gridSystem';
 import Layout1 from '../../../components/layouts/layout1';
 import { confirmUserMutation } from '../../../graphql/user/mutation/confirmUser';
 import { ConfirmUserMutation, ConfirmUserMutationVariables } from '../../../graphql/user/types';
-import { getApolloClient } from '../../../lib/apolloClient';
+import Apollo from '../../../lib/apollo';
 import { redirect } from '../../../lib/redirect';
 
 interface InitialProps {
@@ -16,7 +16,7 @@ interface InitialProps {
 class Confirm extends Component<InitialProps> {
   static async getInitialProps(ctx: NextPageContext): Promise<InitialProps> {
     const token = ctx.query.token as string;
-    const apolloClient = getApolloClient();
+    const apolloClient = Apollo.getClient();
     const { data } = await apolloClient.mutate<ConfirmUserMutation, ConfirmUserMutationVariables>({
       mutation: confirmUserMutation,
       variables: {

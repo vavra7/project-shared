@@ -8,11 +8,11 @@ import {
   HideAlertMutation,
   HideAlertMutationVariables
 } from '../graphql/store/types';
-import { getApolloClient } from './apolloClient';
+import Apollo from './apollo';
 
 export default {
   add: async (alertInput: AlertInput): Promise<Alert> => {
-    const apolloClient = getApolloClient();
+    const apolloClient = Apollo.getClient();
     const { data } = await apolloClient.mutate<AddAlertMutation, AddAlertMutationVariables>({
       mutation: addAlertMutation,
       variables: { inputData: alertInput }
@@ -21,7 +21,7 @@ export default {
     return data!.addAlert!;
   },
   hide: async (id: Alert['id']): Promise<boolean> => {
-    const apolloClient = getApolloClient();
+    const apolloClient = Apollo.getClient();
     const { data } = await apolloClient.mutate<HideAlertMutation, HideAlertMutationVariables>({
       mutation: hideAlertMutation,
       variables: {
