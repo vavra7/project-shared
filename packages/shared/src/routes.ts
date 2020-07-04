@@ -1,9 +1,62 @@
-type Routes = { [key: string]: (...params: string[]) => string };
+export type Route = {
+  href: string;
+  as?: (params: { [key: string]: string }) => string;
+};
+
+export type LangRoutes = {
+  cs: Route;
+  en: Route;
+};
+
+export interface Routes {
+  homePage: LangRoutes;
+  register: LangRoutes;
+  login: LangRoutes;
+  confirmUser: LangRoutes;
+  profile: LangRoutes;
+}
 
 export const routes: Routes = {
-  home: () => '/',
-  register: () => '/user/register',
-  login: () => '/user/login',
-  confirmUser: token => `/user/confirm/${token}`,
-  profile: () => '/user/profile'
+  homePage: {
+    cs: {
+      href: '/'
+    },
+    en: {
+      href: '/en'
+    }
+  },
+  register: {
+    cs: {
+      href: '/registrace'
+    },
+    en: {
+      href: '/en/register'
+    }
+  },
+  login: {
+    cs: {
+      href: '/prihlaseni'
+    },
+    en: {
+      href: '/en/login'
+    }
+  },
+  confirmUser: {
+    cs: {
+      href: '/potvrzeni/[token]',
+      as: token => `/potvrzeni/${token}`
+    },
+    en: {
+      href: '/en/confirm/[token]',
+      as: token => `/en/confirm/${token}`
+    }
+  },
+  profile: {
+    cs: {
+      href: '/ucet'
+    },
+    en: {
+      href: '/en/profile'
+    }
+  }
 };

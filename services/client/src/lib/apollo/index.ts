@@ -16,7 +16,6 @@ class Apollo {
 
   public static setCookie(cookie: IncomingHttpHeaders['cookie']): void {
     this.cookie = cookie;
-    console.log(cookie);
   }
 
   public static getClient(

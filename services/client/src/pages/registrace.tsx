@@ -2,11 +2,11 @@ import { useMutation } from '@apollo/react-hooks';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { FC } from 'react';
 import { object, ref, string } from 'yup';
-import { Container } from '../../components/common/gridSystem';
-import { TextField } from '../../components/common/inputs';
-import Layout1 from '../../components/layouts/layout1';
-import { registerMutation } from '../../graphql/user/mutation/register';
-import { RegisterMutationVariables } from '../../graphql/user/types';
+import { Container } from '../components/common/gridSystem';
+import { TextField } from '../components/common/inputs';
+import Layout1 from '../components/layouts/layout1';
+import { registerMutation } from '../graphql/user/mutation/register';
+import { RegisterMutationVariables } from '../graphql/user/types';
 
 interface RegisterForm {
   email: string;

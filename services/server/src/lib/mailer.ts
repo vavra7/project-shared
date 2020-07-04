@@ -16,7 +16,8 @@ async function getTransporter(): Promise<Transporter> {
 
 async function sendUserConfirmEmail(email: string, token: string): Promise<void> {
   const transporter = await getTransporter();
-  const url = process.env.CLIENT_URL + routes.confirmUser(token);
+  // TODO: handle translations in link
+  const url = process.env.CLIENT_URL + (routes as any).confirmUser.cs.as(token);
   const mailOptions = {
     from: '"Fred Foo 👻" <foo@example.com>',
     to: email,

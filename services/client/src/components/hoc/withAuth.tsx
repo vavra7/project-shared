@@ -5,6 +5,7 @@ import { meQuery } from '../../graphql/user/query/me';
 import { MeQuery } from '../../graphql/user/types';
 import Apollo from '../../lib/apollo';
 import { redirectWithAlert } from '../../lib/redirect';
+import { localizedRedirectProps } from '../../lib/router';
 
 interface WithAuthProps {
   wrappedInitialProps?: any;
@@ -22,7 +23,7 @@ export default (Wrapped: NextPage) => {
     const { data } = await apolloClient.query<MeQuery>({ query: meQuery });
 
     if (!data.me) {
-      redirectWithAlert(ctx, routes.login(), {
+      redirectWithAlert(ctx, localizedRedirectProps({ langRoutes: routes.login }), {
         title: 'NOT_AUTHENTICATED',
         type: AlertType.Info,
         icon: 'icon-user-lock',

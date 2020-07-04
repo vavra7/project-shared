@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 import { NextPage } from 'next';
-import withAuth from '../../components/hoc/withAuth';
-import Layout1 from '../../components/layouts/layout1';
-import Apollo from '../../lib/apollo';
+import withAuth from '../components/hoc/withAuth';
+import Layout1 from '../components/layouts/layout1';
+import Apollo from '../lib/apollo';
 
 const DUMMY_GQL = gql`
   query($id: String!) {

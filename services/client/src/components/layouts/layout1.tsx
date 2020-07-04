@@ -1,6 +1,7 @@
 import { routes } from '@project-shared/shared';
 import Link from 'next/link';
 import { FC, ReactNode } from 'react';
+import { localizedLinkProps } from '../../lib/router';
 import { Container } from '../common/gridSystem';
 
 interface Props {
@@ -11,7 +12,7 @@ const L1: FC<Props> = ({ children }) => {
   return (
     <>
       <Container className="py-2" flexDirection="row" justifyContent="space-around">
-        <Link href={routes.home()}>
+        <Link {...localizedLinkProps({ langRoutes: routes.homePage })}>
           <a>
             <i className="icon-home" /> index
           </a>
@@ -21,15 +22,15 @@ const L1: FC<Props> = ({ children }) => {
           <a>test</a>
         </Link>
 
-        <Link href={routes.register()}>
+        <Link {...localizedLinkProps({ langRoutes: routes.register })}>
           <a>register</a>
         </Link>
 
-        <Link href={routes.login()}>
+        <Link {...localizedLinkProps({ langRoutes: routes.login })}>
           <a>login</a>
         </Link>
 
-        <Link href={routes.profile()}>
+        <Link {...localizedLinkProps({ langRoutes: routes.profile })}>
           <a>profile</a>
         </Link>
       </Container>

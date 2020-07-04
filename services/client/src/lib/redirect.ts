@@ -1,32 +1,43 @@
 import { NextPageContext } from 'next';
+import { LinkProps } from 'next/link';
 import Router from 'next/router';
 import { AlertInput } from '../graphql/store/types';
 import alerts from './alerts';
 
+export type RedirectProps = [LinkProps['href'], LinkProps['as']];
+
 const isServer: boolean = typeof window === 'undefined';
+
+const location = (redirectProps: RedirectProps): string => {
+  return typeof redirectProps[0] === 'string' ? redirectProps[0] : (redirectProps[1] as string);
+};
 
 export function redirectWithAlert(
   ctx: NextPageContext,
-  location: string,
+  redirectProps: RedirectProps,
   alertInput: AlertInput
 ): void {
   if (isServer) {
     const locationWithAlert = new URLSearchParams();
     locationWithAlert.append('alert', JSON.stringify(alertInput));
 
-    ctx.res?.writeHead(303, { Location: location + '?' + locationWithAlert.toString() });
+    ctx.res?.writeHead(303, {
+      Location: location(redirectProps) + '?' + locationWithAlert.toString()
+    });
     ctx.res?.end();
   } else {
-    Router.replace(location);
+    Router.replace(...redirectProps);
     alerts.add(alertInput);
   }
 }
 
-export function redirect(ctx: NextPageContext, location: string): void {
+export function redirect(ctx: NextPageContext, redirectProps: RedirectProps): void {
   if (isServer) {
-    ctx.res?.writeHead(303, { Location: location });
+    ctx.res?.writeHead(303, {
+      Location: location(redirectProps)
+    });
     ctx.res?.end();
   } else {
-    Router.replace(location);
+    Router.replace(...redirectProps);
   }
 }

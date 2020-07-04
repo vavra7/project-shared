@@ -4,14 +4,16 @@ import { Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { object, string } from 'yup';
-import { Container } from '../../components/common/gridSystem';
-import { TextField } from '../../components/common/inputs';
-import Layout1 from '../../components/layouts/layout1';
-import { AlertType } from '../../graphql/store/types';
-import { loginMutation } from '../../graphql/user/mutation/login';
-import { meQuery } from '../../graphql/user/query/me';
-import { LoginMutation, LoginMutationVariables, MeQuery } from '../../graphql/user/types';
-import alerts from '../../lib/alerts';
+import { Container } from '../components/common/gridSystem';
+import { TextField } from '../components/common/inputs';
+import Layout1 from '../components/layouts/layout1';
+import { AlertType } from '../graphql/store/types';
+import { loginMutation } from '../graphql/user/mutation/login';
+import { meQuery } from '../graphql/user/query/me';
+import { LoginMutation, LoginMutationVariables, MeQuery } from '../graphql/user/types';
+import alerts from '../lib/alerts';
+import { localizedRedirectProps } from '../lib/router';
+import { t } from '../lib/translations';
 
 type LoginForm = LoginMutationVariables;
 
@@ -45,7 +47,7 @@ const Login: FC = () => {
           type: AlertType.Success
         });
 
-        router.push(routes.home());
+        router.push(...localizedRedirectProps({ langRoutes: routes.homePage }));
       }
     }
   });
@@ -80,7 +82,7 @@ const Login: FC = () => {
               <Field component={TextField} label="Password" name="password" type="password" />
 
               <button disabled={isSubmitting} type="submit">
-                Submit
+                {t('buttons.submit')}
               </button>
             </Form>
           )}

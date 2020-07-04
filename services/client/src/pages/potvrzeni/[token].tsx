@@ -1,12 +1,13 @@
 import { routes } from '@project-shared/shared';
 import { NextPageContext } from 'next';
 import { Component, ReactNode } from 'react';
-import { Container } from '../../../components/common/gridSystem';
-import Layout1 from '../../../components/layouts/layout1';
-import { confirmUserMutation } from '../../../graphql/user/mutation/confirmUser';
-import { ConfirmUserMutation, ConfirmUserMutationVariables } from '../../../graphql/user/types';
-import Apollo from '../../../lib/apollo';
-import { redirect } from '../../../lib/redirect';
+import { Container } from '../../components/common/gridSystem';
+import Layout1 from '../../components/layouts/layout1';
+import { confirmUserMutation } from '../../graphql/user/mutation/confirmUser';
+import { ConfirmUserMutation, ConfirmUserMutationVariables } from '../../graphql/user/types';
+import Apollo from '../../lib/apollo';
+import { redirect } from '../../lib/redirect';
+import { localizedRedirectProps } from '../../lib/router';
 
 interface InitialProps {
   token: string;
@@ -24,7 +25,7 @@ class Confirm extends Component<InitialProps> {
       }
     });
 
-    if (data?.confirmUser) redirect(ctx, routes.login());
+    if (data?.confirmUser) redirect(ctx, localizedRedirectProps({ langRoutes: routes.login }));
 
     const initialProps: InitialProps = {
       token,
