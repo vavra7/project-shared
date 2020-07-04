@@ -22,6 +22,7 @@ export const resolvers = {
         __typename: 'Alert',
         id: getId(alerts) as string,
         body: '',
+        icon: '',
         display: true,
         timestamp: moment().toISOString(),
         ...inputData

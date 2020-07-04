@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import { routes } from '@project-shared/shared';
 import { Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
@@ -7,26 +7,46 @@ import { object, string } from 'yup';
 import { Container } from '../../components/common/gridSystem';
 import { TextField } from '../../components/common/inputs';
 import Layout1 from '../../components/layouts/layout1';
+import { AlertType } from '../../graphql/store/types';
 import { loginMutation } from '../../graphql/user/mutation/login';
 import { meQuery } from '../../graphql/user/query/me';
 import { LoginMutation, LoginMutationVariables, MeQuery } from '../../graphql/user/types';
+import alerts from '../../lib/alerts';
 
 type LoginForm = LoginMutationVariables;
 
 const Login: FC = () => {
   const router = useRouter();
 
-  const [callLogin] = useMutation(loginMutation, {
-    onCompleted: (data: LoginMutation) => {
-      if (data.login) {
-        callMe();
-      }
-    }
-  });
+  const [callLogin] = useMutation<LoginMutation, LoginMutationVariables>(loginMutation, {
+    update: (store, { data }) => {
+      if (!data?.login) return;
 
-  const [callMe] = useLazyQuery(meQuery, {
-    onCompleted: (data: MeQuery) => {
-      if (data.me) router.push(routes.home());
+      store.writeQuery<MeQuery>({
+        query: meQuery,
+        data: {
+          me: {
+            ...data.login
+          }
+        }
+      });
+    },
+    onCompleted: (data: LoginMutation) => {
+      if (!data?.login) {
+        alerts.add({
+          title: 'Incorrect login or password',
+          type: AlertType.Error
+        });
+
+        return;
+      } else {
+        alerts.add({
+          title: 'Successfully logged in',
+          type: AlertType.Success
+        });
+
+        router.push(routes.home());
+      }
     }
   });
 

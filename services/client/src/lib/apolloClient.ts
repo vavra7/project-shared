@@ -38,7 +38,11 @@ function initializeApolloClient(): ApolloClient<NormalizedCacheObject> {
     uri: isServer ? gqlNetworkUrl : gqlPublicUrl
   });
 
-  const errorLink = new ErrorLink(({ graphQLErrors, networkError }) => {
+  const errorLink = new ErrorLink(({ graphQLErrors, networkError, response }) => {
+    if (response?.errors?.length) {
+      response.errors = [];
+    }
+
     if (graphQLErrors) {
       alerts.add({
         title: graphQLErrors[0].extensions ? graphQLErrors[0].extensions.code : '',
