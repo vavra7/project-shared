@@ -1,5 +1,6 @@
 {
   "title": "Přihlášení",
+  "link": "přihlášení",
   "loginForm": {
     "email": "Email",
     "password": "Heslo"

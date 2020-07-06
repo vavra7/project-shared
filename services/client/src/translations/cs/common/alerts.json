@@ -1,0 +1,6 @@
+{
+  "notAuthenticated": {
+    "title": "Nejste přihlášen",
+    "body": "Pro přístup na tuto stránku musíte být přihlášen."
+  }
+}

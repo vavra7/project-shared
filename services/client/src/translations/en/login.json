@@ -1,0 +1,8 @@
+{
+  "title": "Login",
+  "link": "login",
+  "loginForm": {
+    "email": "Email",
+    "password": "Password"
+  }
+}

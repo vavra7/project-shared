@@ -1,7 +1,7 @@
 import { routes } from '@project-shared/shared';
 import Link from 'next/link';
 import { FC, ReactNode } from 'react';
-import { tlp } from '../../lib/translations';
+import { t, tlp } from '../../lib/translations';
 import { Container } from '../common/gridSystem';
 import LanguageSwitcher from '../common/LanguageSwitcher';
 
@@ -28,7 +28,7 @@ const L1: FC<Props> = ({ children }) => {
         </Link>
 
         <Link {...tlp({ tRoutes: routes.login })}>
-          <a>login</a>
+          <a>{t('login.link')}</a>
         </Link>
 
         <Link {...tlp({ tRoutes: routes.profile })}>

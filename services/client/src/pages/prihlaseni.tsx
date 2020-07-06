@@ -87,7 +87,7 @@ const Login: NextPage = () => {
               />
 
               <button disabled={isSubmitting} type="submit">
-                {t('buttons.submit')}
+                {t('common.buttons.submit')}
               </button>
             </Form>
           )}

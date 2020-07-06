@@ -5,7 +5,7 @@ import { meQuery } from '../../graphql/user/query/me';
 import { MeQuery } from '../../graphql/user/types';
 import Apollo from '../../lib/apollo';
 import { redirectWithAlert } from '../../lib/redirect';
-import { trp } from '../../lib/translations';
+import { t, trp } from '../../lib/translations';
 
 interface WithAuthProps {
   wrappedInitialProps?: any;
@@ -24,10 +24,10 @@ export default (Wrapped: NextPage) => {
 
     if (!data.me) {
       redirectWithAlert(ctx, trp({ tRoutes: routes.login }), {
-        title: 'NOT_AUTHENTICATED',
+        title: t('common.alerts.notAuthenticated.title'),
+        body: t('common.alerts.notAuthenticated.body'),
         type: AlertTypeEnum.Info,
-        icon: 'icon-user-lock',
-        body: 'Please log in.'
+        icon: 'icon-user-lock'
       });
     }
 

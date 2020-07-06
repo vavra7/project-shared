@@ -1,0 +1,6 @@
+{
+  "notAuthenticated": {
+    "title": "Not Authenticated",
+    "body": "Please login to access this page."
+  }
+}
