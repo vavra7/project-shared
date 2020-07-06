@@ -12,6 +12,13 @@ const location = (redirectProps: RedirectProps): string => {
   return typeof redirectProps[0] === 'string' ? redirectProps[0] : (redirectProps[1] as string);
 };
 
+/**
+ * Conditional redirect server side or client side
+ *
+ * @param ctx
+ * @param redirectProps
+ * @param alertInput
+ */
 export function redirectWithAlert(
   ctx: NextPageContext,
   redirectProps: RedirectProps,
@@ -31,6 +38,12 @@ export function redirectWithAlert(
   }
 }
 
+/**
+ * Conditional redirect server side or client side
+ *
+ * @param ctx
+ * @param redirectProps
+ */
 export function redirect(ctx: NextPageContext, redirectProps: RedirectProps): void {
   if (isServer) {
     ctx.res?.writeHead(303, {

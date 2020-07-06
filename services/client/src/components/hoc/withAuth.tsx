@@ -1,11 +1,11 @@
 import { routes } from '@project-shared/shared';
 import { NextPage, NextPageContext } from 'next';
-import { AlertType } from '../../graphql/store/types';
+import { AlertTypeEnum } from '../../graphql/store/types';
 import { meQuery } from '../../graphql/user/query/me';
 import { MeQuery } from '../../graphql/user/types';
 import Apollo from '../../lib/apollo';
 import { redirectWithAlert } from '../../lib/redirect';
-import { localizedRedirectProps } from '../../lib/router';
+import { trp } from '../../lib/translations';
 
 interface WithAuthProps {
   wrappedInitialProps?: any;
@@ -23,9 +23,9 @@ export default (Wrapped: NextPage) => {
     const { data } = await apolloClient.query<MeQuery>({ query: meQuery });
 
     if (!data.me) {
-      redirectWithAlert(ctx, localizedRedirectProps({ langRoutes: routes.login }), {
+      redirectWithAlert(ctx, trp({ tRoutes: routes.login }), {
         title: 'NOT_AUTHENTICATED',
-        type: AlertType.Info,
+        type: AlertTypeEnum.Info,
         icon: 'icon-user-lock',
         body: 'Please log in.'
       });

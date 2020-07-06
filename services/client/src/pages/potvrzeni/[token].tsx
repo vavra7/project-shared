@@ -7,7 +7,7 @@ import { confirmUserMutation } from '../../graphql/user/mutation/confirmUser';
 import { ConfirmUserMutation, ConfirmUserMutationVariables } from '../../graphql/user/types';
 import Apollo from '../../lib/apollo';
 import { redirect } from '../../lib/redirect';
-import { localizedRedirectProps } from '../../lib/router';
+import { trp } from '../../lib/translations';
 
 interface InitialProps {
   token: string;
@@ -25,7 +25,7 @@ class Confirm extends Component<InitialProps> {
       }
     });
 
-    if (data?.confirmUser) redirect(ctx, localizedRedirectProps({ langRoutes: routes.login }));
+    if (data?.confirmUser) redirect(ctx, trp({ tRoutes: routes.login }));
 
     const initialProps: InitialProps = {
       token,

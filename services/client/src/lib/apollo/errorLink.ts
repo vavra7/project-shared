@@ -1,5 +1,5 @@
 import { ErrorLink } from 'apollo-link-error';
-import { AlertType } from '../../graphql/store/types';
+import { AlertTypeEnum } from '../../graphql/store/types';
 import alerts from '../alerts';
 
 export function getErrorLink(): ErrorLink {
@@ -13,7 +13,7 @@ export function getErrorLink(): ErrorLink {
         title: graphQLErrors[0].extensions ? graphQLErrors[0].extensions.code : '',
         body: graphQLErrors[0].message,
         icon: 'icon-exclamation-circle',
-        type: AlertType.Error
+        type: AlertTypeEnum.Error
       });
     } else {
       console.error('networkError', networkError);

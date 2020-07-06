@@ -3,17 +3,17 @@ export type Route = {
   as?: (params: { [key: string]: string }) => string;
 };
 
-export type LangRoutes = {
+export type TranslatableRoutes = {
   cs: Route;
   en: Route;
 };
 
 export interface Routes {
-  homePage: LangRoutes;
-  register: LangRoutes;
-  login: LangRoutes;
-  confirmUser: LangRoutes;
-  profile: LangRoutes;
+  homePage: TranslatableRoutes;
+  register: TranslatableRoutes;
+  login: TranslatableRoutes;
+  confirmUser: TranslatableRoutes;
+  profile: TranslatableRoutes;
 }
 
 export const routes: Routes = {

@@ -6,13 +6,13 @@ import Layout1 from '../components/layouts/layout1';
 import { addAlertMutation } from '../graphql/store/mutation/addAlert';
 import { hideAlertMutation } from '../graphql/store/mutation/hideAlert';
 import { alertsQuery } from '../graphql/store/query/alerts';
-import { AlertInput, AlertType } from '../graphql/store/types';
+import { AlertInput, AlertTypeEnum } from '../graphql/store/types';
 import Apollo from '../lib/apollo';
 
 const inputAlert: AlertInput = {
   title: 'Test Alert',
   body: 'Body',
-  type: AlertType.Success,
+  type: AlertTypeEnum.Success,
   icon: 'icon-home'
 };
 
@@ -62,7 +62,8 @@ Test.getInitialProps = async () => {
   });
 
   return {
-    apolloCache: apolloClient.extract()
+    apolloCache: apolloClient.extract(),
+    test: apolloClient.extract()
   };
 };
 //#endregion

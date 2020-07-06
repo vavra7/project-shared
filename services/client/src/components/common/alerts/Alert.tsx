@@ -1,6 +1,6 @@
 import { motion, PanInfo, useAnimation, useMotionValue, useTransform } from 'framer-motion';
 import { FC, useEffect } from 'react';
-import { Alert as AlertObjectType, AlertType } from '../../../graphql/store/types';
+import { Alert as AlertObjectType, AlertTypeEnum } from '../../../graphql/store/types';
 import alerts from '../../../lib/alerts';
 import scopedStyles from './Alert.module.scss';
 
@@ -47,13 +47,13 @@ const Alert: FC<AlertProps> = props => {
 
   const modifierClass = (() => {
     switch (type) {
-      case AlertType.Success:
+      case AlertTypeEnum.Success:
         return scopedStyles['alert--success'];
 
-      case AlertType.Info:
+      case AlertTypeEnum.Info:
         return scopedStyles['alert--info'];
 
-      case AlertType.Error:
+      case AlertTypeEnum.Error:
         return scopedStyles['alert--error'];
     }
   })();

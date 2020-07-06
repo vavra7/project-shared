@@ -14,17 +14,22 @@ export type Scalars = {
   Float: number;
 };
 
-export enum AlertType {
+export enum AlertTypeEnum {
   Error = 'ERROR',
   Success = 'SUCCESS',
   Info = 'INFO'
+}
+
+export enum LanguageEnum {
+  Cs = 'cs',
+  En = 'en'
 }
 
 export type AlertInput = {
   title: Scalars['String'];
   body?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
-  type: AlertType;
+  type: AlertTypeEnum;
 };
 
 export type Alert = {
@@ -33,7 +38,7 @@ export type Alert = {
   title: Scalars['String'];
   body?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
-  type: AlertType;
+  type: AlertTypeEnum;
   display: Scalars['Boolean'];
   timestamp: Scalars['String'];
 };
@@ -41,12 +46,14 @@ export type Alert = {
 export type Query = {
   __typename?: 'Query';
   alerts: Array<Maybe<Alert>>;
+  language: LanguageEnum;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   addAlert?: Maybe<Alert>;
   hideAlert: Scalars['Boolean'];
+  setLanguage: Scalars['Boolean'];
 };
 
 export type MutationAddAlertArgs = {
@@ -55,6 +62,10 @@ export type MutationAddAlertArgs = {
 
 export type MutationHideAlertArgs = {
   id: Scalars['ID'];
+};
+
+export type MutationSetLanguageArgs = {
+  language: LanguageEnum;
 };
 
 export type AddAlertMutationVariables = Exact<{
@@ -76,6 +87,12 @@ export type HideAlertMutationVariables = Exact<{
 
 export type HideAlertMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'hideAlert'>;
 
+export type SetLanguageMutationVariables = Exact<{
+  language: LanguageEnum;
+}>;
+
+export type SetLanguageMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'setLanguage'>;
+
 export type AlertsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type AlertsQuery = { __typename?: 'Query' } & {
@@ -88,6 +105,10 @@ export type AlertsQuery = { __typename?: 'Query' } & {
     >
   >;
 };
+
+export type LanguageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type LanguageQuery = { __typename?: 'Query' } & Pick<Query, 'language'>;
 
 export const AddAlertDocument = gql`
   mutation AddAlert($inputData: AlertInput!) {
@@ -125,6 +146,20 @@ export type HideAlertMutationOptions = ApolloReactCommon.BaseMutationOptions<
   HideAlertMutation,
   HideAlertMutationVariables
 >;
+export const SetLanguageDocument = gql`
+  mutation SetLanguage($language: LanguageEnum!) {
+    setLanguage(language: $language) @client
+  }
+`;
+export type SetLanguageMutationFn = ApolloReactCommon.MutationFunction<
+  SetLanguageMutation,
+  SetLanguageMutationVariables
+>;
+export type SetLanguageMutationResult = ApolloReactCommon.MutationResult<SetLanguageMutation>;
+export type SetLanguageMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  SetLanguageMutation,
+  SetLanguageMutationVariables
+>;
 export const AlertsDocument = gql`
   query Alerts {
     alerts {
@@ -139,6 +174,15 @@ export const AlertsDocument = gql`
   }
 `;
 export type AlertsQueryResult = ApolloReactCommon.QueryResult<AlertsQuery, AlertsQueryVariables>;
+export const LanguageDocument = gql`
+  query Language {
+    language
+  }
+`;
+export type LanguageQueryResult = ApolloReactCommon.QueryResult<
+  LanguageQuery,
+  LanguageQueryVariables
+>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -232,7 +276,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  AlertType: AlertType;
+  AlertTypeEnum: AlertTypeEnum;
+  LanguageEnum: LanguageEnum;
   AlertInput: AlertInput;
   String: ResolverTypeWrapper<Scalars['String']>;
   Alert: ResolverTypeWrapper<Alert>;
@@ -261,7 +306,7 @@ export type AlertResolvers<
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   body?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['AlertType'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['AlertTypeEnum'], ParentType, ContextType>;
   display?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
@@ -272,6 +317,7 @@ export type QueryResolvers<
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
   alerts?: Resolver<Array<Maybe<ResolversTypes['Alert']>>, ParentType, ContextType>;
+  language?: Resolver<ResolversTypes['LanguageEnum'], ParentType, ContextType>;
 };
 
 export type MutationResolvers<
@@ -289,6 +335,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationHideAlertArgs, 'id'>
+  >;
+  setLanguage?: Resolver<
+    ResolversTypes['Boolean'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationSetLanguageArgs, 'language'>
   >;
 };
 

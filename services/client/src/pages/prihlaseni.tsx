@@ -1,23 +1,23 @@
 import { useMutation } from '@apollo/react-hooks';
 import { routes } from '@project-shared/shared';
 import { Field, Form, Formik } from 'formik';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { FC } from 'react';
 import { object, string } from 'yup';
 import { Container } from '../components/common/gridSystem';
 import { TextField } from '../components/common/inputs';
 import Layout1 from '../components/layouts/layout1';
-import { AlertType } from '../graphql/store/types';
+import { AlertTypeEnum } from '../graphql/store/types';
 import { loginMutation } from '../graphql/user/mutation/login';
 import { meQuery } from '../graphql/user/query/me';
 import { LoginMutation, LoginMutationVariables, MeQuery } from '../graphql/user/types';
 import alerts from '../lib/alerts';
-import { localizedRedirectProps } from '../lib/router';
-import { t } from '../lib/translations';
+import Apollo from '../lib/apollo';
+import { t, trp } from '../lib/translations';
 
 type LoginForm = LoginMutationVariables;
 
-const Login: FC = () => {
+const Login: NextPage = () => {
   const router = useRouter();
 
   const [callLogin] = useMutation<LoginMutation, LoginMutationVariables>(loginMutation, {
@@ -37,17 +37,17 @@ const Login: FC = () => {
       if (!data?.login) {
         alerts.add({
           title: 'Incorrect login or password',
-          type: AlertType.Error
+          type: AlertTypeEnum.Error
         });
 
         return;
       } else {
         alerts.add({
           title: 'Successfully logged in',
-          type: AlertType.Success
+          type: AlertTypeEnum.Success
         });
 
-        router.push(...localizedRedirectProps({ langRoutes: routes.homePage }));
+        router.push(...trp({ tRoutes: routes.homePage }));
       }
     }
   });
@@ -92,4 +92,11 @@ const Login: FC = () => {
   );
 };
 
+Login.getInitialProps = () => {
+  const apolloClient = Apollo.getClient();
+
+  return {
+    apolloCache: apolloClient.extract()
+  };
+};
 export default Login;

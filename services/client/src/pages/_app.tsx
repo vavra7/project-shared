@@ -9,6 +9,7 @@ import '../fonts/fonts.scss';
 import { AlertInput } from '../graphql/store/types';
 import alerts from '../lib/alerts';
 import Apollo from '../lib/apollo';
+import Translation from '../lib/translations';
 import '../styles/styles.scss';
 
 interface ProjectSharedAppProps extends AppInitialProps {
@@ -32,7 +33,15 @@ class ProjectSharedApp extends App<ProjectSharedAppProps> {
       Apollo.setCookie(context.ctx.req?.headers?.cookie);
     }
 
+    Translation.extractLanguage(context.ctx.pathname);
+
     const appProps = await App.getInitialProps(context);
+
+    if (!appProps.pageProps.apolloCache) {
+      const apolloClient = Apollo.getClient();
+
+      appProps.pageProps.apolloCache = apolloClient.extract();
+    }
 
     return { ...appProps, alert };
   }

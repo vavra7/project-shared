@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import moment from 'moment';
 import { alertsQuery } from '../graphql/store/query/alerts';
 import { Alert, AlertsQuery, MutationResolvers, Query } from '../graphql/store/types';
+import { AppStore } from './initialState';
 
 export const resolvers = {
   Mutation: {
@@ -28,8 +29,8 @@ export const resolvers = {
         ...inputData
       };
 
-      const data = {
-        alerts: [newAlert, ...alerts]
+      const data: Pick<AppStore, 'alerts'> = {
+        alerts: [newAlert, ...(alerts as Alert[])]
       };
 
       cache.writeData({ data });
@@ -56,6 +57,15 @@ export const resolvers = {
           display: false
         }
       });
+
+      return true;
+    },
+    setLanguage: (parent, { language }, { cache }: { cache: InMemoryCache }) => {
+      const data: Pick<AppStore, 'language'> = {
+        language
+      };
+
+      cache.writeData({ data });
 
       return true;
     }

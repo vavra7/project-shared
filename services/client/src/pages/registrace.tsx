@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/react-hooks';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
-import { FC } from 'react';
+import { NextPage } from 'next';
 import { object, ref, string } from 'yup';
 import { Container } from '../components/common/gridSystem';
 import { TextField } from '../components/common/inputs';
@@ -16,7 +16,7 @@ interface RegisterForm {
   confirmPassword: string;
 }
 
-const Register: FC = () => {
+const Register: NextPage = () => {
   const [callRegister] = useMutation(registerMutation, {
     onError: err => {
       console.log(err.graphQLErrors[0]);

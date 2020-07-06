@@ -1,17 +1,22 @@
 import gql from 'graphql-tag';
 
 export const typeDefs = gql`
-  enum AlertType {
+  enum AlertTypeEnum {
     ERROR
     SUCCESS
     INFO
+  }
+
+  enum LanguageEnum {
+    cs
+    en
   }
 
   input AlertInput {
     title: String!
     body: String
     icon: String
-    type: AlertType!
+    type: AlertTypeEnum!
   }
 
   type Alert {
@@ -19,20 +24,19 @@ export const typeDefs = gql`
     title: String!
     body: String
     icon: String
-    type: AlertType!
+    type: AlertTypeEnum!
     display: Boolean!
     timestamp: String!
   }
 
   type Query {
     alerts: [Alert]!
+    language: LanguageEnum!
   }
 
   type Mutation {
     addAlert(inputData: AlertInput!): Alert
-  }
-
-  type Mutation {
     hideAlert(id: ID!): Boolean!
+    setLanguage(language: LanguageEnum!): Boolean!
   }
 `;
