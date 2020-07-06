@@ -12,3 +12,11 @@ h3,
 h4 {
 	font-family: $secondary-font;
 }
+
+$font-weight-list: (bolder, bold);
+
+@each $option in $font-weight-list {
+	.fw-#{$option} {
+		font-weight: $option;
+	}
+}

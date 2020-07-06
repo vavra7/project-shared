@@ -1,4 +1,4 @@
-import { Route, TranslatableRoutes } from '@project-shared/shared';
+import { Route, TranslatableRoute } from '@project-shared/shared';
 import { NextPageContext } from 'next';
 import { LinkProps } from 'next/link';
 import { setLanguageMutation } from '../graphql/store/mutation/setLanguage';
@@ -14,8 +14,9 @@ import Apollo from './apollo';
 import { RedirectProps } from './redirect';
 
 type LocationSrc = {
-  tRoutes: TranslatableRoutes;
+  tRoutes: TranslatableRoute;
   params?: { [key: string]: string };
+  language?: LanguageEnum;
 };
 
 export default class Translation {
@@ -56,6 +57,7 @@ export default class Translation {
    */
   public static translation(path: string, params?: { [key: string]: string }): string {
     const langTranslations = translations[this.getLanguage()];
+
     let translation: string = path.split('.').reduce((prevVal: any, currentVal: string) => {
       return (prevVal && prevVal[currentVal]) || null;
     }, langTranslations);
@@ -66,7 +68,13 @@ export default class Translation {
       }
     }
 
-    return translation;
+    if (!translation) {
+      console.warn('Did not find "%s" translation for path: "%s".', this.getLanguage(), path);
+
+      return path;
+    } else {
+      return translation;
+    }
   }
 
   /**
@@ -75,7 +83,9 @@ export default class Translation {
    * @param locationSrc
    */
   public static translatedLinkProps(locationSrc: LocationSrc): LinkProps {
-    const route: Route = locationSrc.tRoutes[this.getLanguage()];
+    const route: Route = locationSrc.language
+      ? locationSrc.tRoutes[locationSrc.language]
+      : locationSrc.tRoutes[this.getLanguage()];
     const linkProps: LinkProps = {
       href: route.href
     };

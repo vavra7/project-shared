@@ -3,17 +3,18 @@ export type Route = {
   as?: (params: { [key: string]: string }) => string;
 };
 
-export type TranslatableRoutes = {
+export type TranslatableRoute = {
   cs: Route;
   en: Route;
 };
 
 export interface Routes {
-  homePage: TranslatableRoutes;
-  register: TranslatableRoutes;
-  login: TranslatableRoutes;
-  confirmUser: TranslatableRoutes;
-  profile: TranslatableRoutes;
+  homePage: TranslatableRoute;
+  register: TranslatableRoute;
+  login: TranslatableRoute;
+  confirmUser: TranslatableRoute;
+  profile: TranslatableRoute;
+  test: TranslatableRoute;
 }
 
 export const routes: Routes = {
@@ -57,6 +58,14 @@ export const routes: Routes = {
     },
     en: {
       href: '/en/profile'
+    }
+  },
+  test: {
+    cs: {
+      href: '/test'
+    },
+    en: {
+      href: '/en/test'
     }
   }
 };

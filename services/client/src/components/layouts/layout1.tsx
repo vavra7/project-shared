@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FC, ReactNode } from 'react';
 import { tlp } from '../../lib/translations';
 import { Container } from '../common/gridSystem';
+import LanguageSwitcher from '../common/LanguageSwitcher';
 
 interface Props {
   children: ReactNode;
@@ -18,7 +19,7 @@ const L1: FC<Props> = ({ children }) => {
           </a>
         </Link>
 
-        <Link href="/test">
+        <Link {...tlp({ tRoutes: routes.test })}>
           <a>test</a>
         </Link>
 
@@ -34,9 +35,7 @@ const L1: FC<Props> = ({ children }) => {
           <a>profile</a>
         </Link>
 
-        <Link href="/en/login">
-          <a>en login</a>
-        </Link>
+        <LanguageSwitcher />
       </Container>
 
       <div className="mt-3">{children}</div>

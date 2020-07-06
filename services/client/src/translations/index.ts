@@ -1,8 +1,10 @@
 import buttonsCs from '../translations/cs/buttons.json';
+import loginCs from '../translations/cs/login.json';
 import buttonsEn from '../translations/en/buttons.json';
 
 const cs = {
-  buttons: buttonsCs
+  buttons: buttonsCs,
+  login: loginCs
 };
 
 const en = {

@@ -1,61 +1,55 @@
 $position-list: (relative, absolute, fixed);
 
-@each $position in $position-list {
-  .p-#{$position} {
-    position: $position;
+@each $option in $position-list {
+  .p-#{$option} {
+    position: $option;
   }
 }
 
 $display-list: (flex, block);
 
-@each $display in $display-list {
-  .d-#{$display} {
-    display: $display;
+@each $option in $display-list {
+  .d-#{$option} {
+    display: $option;
   }
 }
 
 $flex-direction-list: (column, row);
 
-@each $direction in $flex-direction-list {
-  .fd-#{$direction} {
-    flex-direction: $direction;
+@each $option in $flex-direction-list {
+  .fd-#{$option} {
+    flex-direction: $option;
   }
 }
 
 $align-items-list: (center);
 
-@each $align-items in $align-items-list {
-  .ai-#{$align-items} {
-    align-items: $align-items;
+@each $option in $align-items-list {
+  .ai-#{$option} {
+    align-items: $option;
   }
 }
 
-$justify-content-list: (
-  flex-start,
-  center,
-  flex-end,
-  space-between,
-  space-around
-);
+$justify-content-list: (flex-start, center, flex-end, space-between, space-around);
 
-@each $justify-content in $justify-content-list {
-  .jc-#{$justify-content} {
-    justify-content: $justify-content;
+@each $option in $justify-content-list {
+  .jc-#{$option} {
+    justify-content: $option;
   }
 }
 
 $flex-grow-list: (0, 1);
 
-@each $flex-grow in $flex-grow-list {
-  .fg-#{$flex-grow} {
-    flex-grow: $flex-grow;
+@each $option in $flex-grow-list {
+  .fg-#{$option} {
+    flex-grow: $option;
   }
 }
 
-$text-align: right, center, left, justify;
+$text-align-list: (right, center, left, justify);
 
-@each $option in $text-align {
-	.ta-#{$option} {
-		text-align: $option;
-	}
+@each $option in $text-align-list {
+  .ta-#{$option} {
+    text-align: $option;
+  }
 }

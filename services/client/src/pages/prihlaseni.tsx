@@ -69,7 +69,7 @@ const Login: NextPage = () => {
   return (
     <Layout1>
       <Container alignItems="center">
-        <h1>Login</h1>
+        <h1>{t('login.title')}</h1>
 
         <Formik
           initialValues={initialValues}
@@ -78,8 +78,13 @@ const Login: NextPage = () => {
         >
           {({ isSubmitting }) => (
             <Form>
-              <Field component={TextField} label="Email" name="email" />
-              <Field component={TextField} label="Password" name="password" type="password" />
+              <Field component={TextField} label={t('login.loginForm.email')} name="email" />
+              <Field
+                component={TextField}
+                label={t('login.loginForm.password')}
+                name="password"
+                type="password"
+              />
 
               <button disabled={isSubmitting} type="submit">
                 {t('buttons.submit')}
