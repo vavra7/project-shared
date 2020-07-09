@@ -1,4 +1,4 @@
-import { routes, TranslatableRoute } from '@project-shared/shared';
+import { routes, Routes, TranslatableRoute } from '@project-shared/shared';
 import Link from 'next/link';
 import { withRouter } from 'next/router';
 import { PureComponent } from 'react';
@@ -26,9 +26,10 @@ class LanguageSwitcher extends PureComponent {
   }
 
   findTranslatableRoute(language: LanguageEnum, pathname: string): TranslatableRoute | undefined {
-    for (const key in routes) {
-      if (((routes as any)[key] as TranslatableRoute)[language].href === pathname) {
-        return (routes as any)[key] as TranslatableRoute;
+    let key: keyof Routes;
+    for (key in routes) {
+      if (routes[key][language].href === pathname) {
+        return (routes as any)[key];
       }
     }
   }
