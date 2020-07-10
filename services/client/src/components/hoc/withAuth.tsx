@@ -1,8 +1,8 @@
 import { routes } from '@project-shared/shared';
 import { NextPage, NextPageContext } from 'next';
-import { AlertTypeEnum } from '../../graphql/store/types';
+import { AlertTypeEnum } from '../../graphql/store/modelGenerated';
+import { MeQuery } from '../../graphql/user/modelGenerated';
 import { meQuery } from '../../graphql/user/query/me';
-import { MeQuery } from '../../graphql/user/types';
 import Apollo from '../../lib/apollo';
 import { redirectWithAlert } from '../../lib/redirect';
 import { t, trp } from '../../lib/translations';

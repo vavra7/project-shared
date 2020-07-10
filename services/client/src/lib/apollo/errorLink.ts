@@ -1,5 +1,5 @@
 import { ErrorLink } from 'apollo-link-error';
-import { AlertTypeEnum } from '../../graphql/store/types';
+import { AlertTypeEnum } from '../../graphql/store/modelGenerated';
 import alerts from '../alerts';
 
 export function getErrorLink(): ErrorLink {

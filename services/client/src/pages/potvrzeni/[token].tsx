@@ -3,8 +3,11 @@ import { NextPageContext } from 'next';
 import { Component, ReactNode } from 'react';
 import { Container } from '../../components/common/gridSystem';
 import Layout1 from '../../components/layouts/layout1';
+import {
+  ConfirmUserMutation,
+  ConfirmUserMutationVariables
+} from '../../graphql/user/modelGenerated';
 import { confirmUserMutation } from '../../graphql/user/mutation/confirmUser';
-import { ConfirmUserMutation, ConfirmUserMutationVariables } from '../../graphql/user/types';
 import Apollo from '../../lib/apollo';
 import { redirect } from '../../lib/redirect';
 import { trp } from '../../lib/translations';

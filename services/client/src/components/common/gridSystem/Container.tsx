@@ -1,5 +1,5 @@
-import { ReactNode, FC } from 'react';
-import { JustifyContent, AlignItems } from './types';
+import { FC, ReactNode } from 'react';
+import { AlignItems, JustifyContent } from './types';
 
 interface Props {
   children?: ReactNode;
@@ -26,7 +26,7 @@ const Container: FC<Props> = props => {
   if (props.className) classes = classes.concat(` ${props.className}`);
 
   return (
-    <div id={props.id} className={classes} style={props.style}>
+    <div className={classes} id={props.id} style={props.style}>
       {props.children}
     </div>
   );

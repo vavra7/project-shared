@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { ReactElement } from 'react';
 import GlobalAlerts from '../components/common/alerts/GlobalAlerts';
 import '../fonts/fonts.scss';
-import { AlertInput } from '../graphql/store/types';
+import { AlertInput } from '../graphql/store/modelGenerated';
 import alerts from '../lib/alerts';
 import Apollo from '../lib/apollo';
 import Translation from '../lib/translations';

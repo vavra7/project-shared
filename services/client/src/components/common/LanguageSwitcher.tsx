@@ -1,31 +1,26 @@
 import { routes, Routes, TranslatableRoute } from '@project-shared/shared';
+import { flowRight as compose } from 'lodash';
+import { WithRouterProps } from 'next/dist/client/with-router';
 import Link from 'next/link';
 import { withRouter } from 'next/router';
 import { PureComponent } from 'react';
-import { languageQuery } from '../../graphql/store/query/language';
-import { LanguageEnum, LanguageQuery } from '../../graphql/store/types';
-import Apollo from '../../lib/apollo';
+import { LanguageEnum, LanguageProps, withLanguage } from '../../graphql/store/modelGenerated';
 import { tlp } from '../../lib/translations';
 
-class LanguageSwitcher extends PureComponent {
-  language: LanguageEnum;
+type LanguageSwitcherProps = WithRouterProps & LanguageProps;
+
+class LanguageSwitcher extends PureComponent<LanguageSwitcherProps> {
   translatableRoute: TranslatableRoute | undefined;
 
-  constructor(props: any) {
+  constructor(props: LanguageSwitcherProps) {
     super(props);
-
-    this.language = this.getLanguage();
-    this.translatableRoute = this.findTranslatableRoute(this.language, props.router.pathname);
+    this.translatableRoute = this.findTranslatableRoute();
   }
 
-  getLanguage(): LanguageEnum {
-    const apolloClient = Apollo.getClient();
-    const { language } = apolloClient.readQuery<LanguageQuery>({ query: languageQuery })!;
+  findTranslatableRoute(): TranslatableRoute | undefined {
+    const language = this.props.data.language!;
+    const pathname = this.props.router.pathname;
 
-    return language;
-  }
-
-  findTranslatableRoute(language: LanguageEnum, pathname: string): TranslatableRoute | undefined {
     let key: keyof Routes;
     for (key in routes) {
       if (routes[key][language].href === pathname) {
@@ -40,25 +35,25 @@ class LanguageSwitcher extends PureComponent {
     let cs;
     let en;
 
-    if (LanguageEnum.Cs === this.language) {
+    if (LanguageEnum.Cs === this.props.data.language) {
       cs = <span className="fw-bolder">cs</span>;
     } else {
       cs = (
         <span>
           <Link {...tlp({ tRoutes: this.translatableRoute, language: LanguageEnum.Cs })}>
-            <a onClick={() => (this.language = LanguageEnum.Cs)}>cs</a>
+            <a>cs</a>
           </Link>
         </span>
       );
     }
 
-    if (LanguageEnum.En === this.language) {
+    if (LanguageEnum.En === this.props.data.language) {
       en = <span className="fw-bolder">en</span>;
     } else {
       en = (
         <span>
           <Link {...tlp({ tRoutes: this.translatableRoute, language: LanguageEnum.En })}>
-            <a onClick={() => (this.language = LanguageEnum.En)}>en</a>
+            <a>en</a>
           </Link>
         </span>
       );
@@ -72,4 +67,4 @@ class LanguageSwitcher extends PureComponent {
   }
 }
 
-export default withRouter(LanguageSwitcher as any);
+export default compose(withRouter, withLanguage())(LanguageSwitcher);

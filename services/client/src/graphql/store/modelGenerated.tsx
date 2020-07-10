@@ -1,4 +1,5 @@
 import * as ApolloReactCommon from '@apollo/react-common';
+import * as ApolloReactHoc from '@apollo/react-hoc';
 import { GraphQLResolveInfo } from 'graphql';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
@@ -127,6 +128,31 @@ export type AddAlertMutationFn = ApolloReactCommon.MutationFunction<
   AddAlertMutation,
   AddAlertMutationVariables
 >;
+export type AddAlertProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+  [key in TDataName]: ApolloReactCommon.MutationFunction<
+    AddAlertMutation,
+    AddAlertMutationVariables
+  >;
+} &
+  TChildProps;
+export function withAddAlert<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    AddAlertMutation,
+    AddAlertMutationVariables,
+    AddAlertProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    AddAlertMutation,
+    AddAlertMutationVariables,
+    AddAlertProps<TChildProps, TDataName>
+  >(AddAlertDocument, {
+    alias: 'addAlert',
+    ...operationOptions
+  });
+}
 export type AddAlertMutationResult = ApolloReactCommon.MutationResult<AddAlertMutation>;
 export type AddAlertMutationOptions = ApolloReactCommon.BaseMutationOptions<
   AddAlertMutation,
@@ -141,6 +167,31 @@ export type HideAlertMutationFn = ApolloReactCommon.MutationFunction<
   HideAlertMutation,
   HideAlertMutationVariables
 >;
+export type HideAlertProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+  [key in TDataName]: ApolloReactCommon.MutationFunction<
+    HideAlertMutation,
+    HideAlertMutationVariables
+  >;
+} &
+  TChildProps;
+export function withHideAlert<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    HideAlertMutation,
+    HideAlertMutationVariables,
+    HideAlertProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    HideAlertMutation,
+    HideAlertMutationVariables,
+    HideAlertProps<TChildProps, TDataName>
+  >(HideAlertDocument, {
+    alias: 'hideAlert',
+    ...operationOptions
+  });
+}
 export type HideAlertMutationResult = ApolloReactCommon.MutationResult<HideAlertMutation>;
 export type HideAlertMutationOptions = ApolloReactCommon.BaseMutationOptions<
   HideAlertMutation,
@@ -155,6 +206,31 @@ export type SetLanguageMutationFn = ApolloReactCommon.MutationFunction<
   SetLanguageMutation,
   SetLanguageMutationVariables
 >;
+export type SetLanguageProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+  [key in TDataName]: ApolloReactCommon.MutationFunction<
+    SetLanguageMutation,
+    SetLanguageMutationVariables
+  >;
+} &
+  TChildProps;
+export function withSetLanguage<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    SetLanguageMutation,
+    SetLanguageMutationVariables,
+    SetLanguageProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    SetLanguageMutation,
+    SetLanguageMutationVariables,
+    SetLanguageProps<TChildProps, TDataName>
+  >(SetLanguageDocument, {
+    alias: 'setLanguage',
+    ...operationOptions
+  });
+}
 export type SetLanguageMutationResult = ApolloReactCommon.MutationResult<SetLanguageMutation>;
 export type SetLanguageMutationOptions = ApolloReactCommon.BaseMutationOptions<
   SetLanguageMutation,
@@ -173,12 +249,56 @@ export const AlertsDocument = gql`
     }
   }
 `;
+export type AlertsProps<TChildProps = {}, TDataName extends string = 'data'> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<AlertsQuery, AlertsQueryVariables>;
+} &
+  TChildProps;
+export function withAlerts<TProps, TChildProps = {}, TDataName extends string = 'data'>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    AlertsQuery,
+    AlertsQueryVariables,
+    AlertsProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    AlertsQuery,
+    AlertsQueryVariables,
+    AlertsProps<TChildProps, TDataName>
+  >(AlertsDocument, {
+    alias: 'alerts',
+    ...operationOptions
+  });
+}
 export type AlertsQueryResult = ApolloReactCommon.QueryResult<AlertsQuery, AlertsQueryVariables>;
 export const LanguageDocument = gql`
   query Language {
     language
   }
 `;
+export type LanguageProps<TChildProps = {}, TDataName extends string = 'data'> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<LanguageQuery, LanguageQueryVariables>;
+} &
+  TChildProps;
+export function withLanguage<TProps, TChildProps = {}, TDataName extends string = 'data'>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    LanguageQuery,
+    LanguageQueryVariables,
+    LanguageProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    LanguageQuery,
+    LanguageQueryVariables,
+    LanguageProps<TChildProps, TDataName>
+  >(LanguageDocument, {
+    alias: 'language',
+    ...operationOptions
+  });
+}
 export type LanguageQueryResult = ApolloReactCommon.QueryResult<
   LanguageQuery,
   LanguageQueryVariables

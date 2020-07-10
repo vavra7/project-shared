@@ -1,4 +1,4 @@
-import { Alert, LanguageEnum } from '../graphql/store/types';
+import { Alert, LanguageEnum } from '../graphql/store/modelGenerated';
 
 export interface AppStore {
   language: LanguageEnum;

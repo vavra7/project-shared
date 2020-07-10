@@ -1,14 +1,14 @@
 import { Route, TranslatableRoute } from '@project-shared/shared';
 import { NextPageContext } from 'next';
 import { LinkProps } from 'next/link';
-import { setLanguageMutation } from '../graphql/store/mutation/setLanguage';
-import { languageQuery } from '../graphql/store/query/language';
 import {
   LanguageEnum,
   LanguageQuery,
   SetLanguageMutation,
   SetLanguageMutationVariables
-} from '../graphql/store/types';
+} from '../graphql/store/modelGenerated';
+import { setLanguageMutation } from '../graphql/store/mutation/setLanguage';
+import { languageQuery } from '../graphql/store/query/language';
 import translations from '../translations';
 import Apollo from './apollo';
 import { RedirectProps } from './redirect';

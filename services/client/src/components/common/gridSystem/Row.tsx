@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { JustifyContent, AlignItems } from './types';
+import { AlignItems, JustifyContent } from './types';
 
 interface Props {
   children?: ReactNode;
@@ -18,7 +18,7 @@ const Row: FC<Props> = props => {
   if (props.alignItems) classes = classes.concat(` ai-${props.alignItems}`);
 
   return (
-    <div id={props.id} className={classes} style={props.style}>
+    <div className={classes} id={props.id} style={props.style}>
       {props.children}
     </div>
   );

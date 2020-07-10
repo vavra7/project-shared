@@ -1,7 +1,7 @@
 import { NextPageContext } from 'next';
 import { LinkProps } from 'next/link';
 import Router from 'next/router';
-import { AlertInput } from '../graphql/store/types';
+import { AlertInput } from '../graphql/store/modelGenerated';
 import alerts from './alerts';
 
 export type RedirectProps = [LinkProps['href'], LinkProps['as']];

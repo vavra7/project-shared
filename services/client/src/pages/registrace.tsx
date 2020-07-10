@@ -5,8 +5,8 @@ import { object, ref, string } from 'yup';
 import { Container } from '../components/common/gridSystem';
 import { TextField } from '../components/common/inputs';
 import Layout1 from '../components/layouts/layout1';
+import { RegisterMutationVariables } from '../graphql/user/modelGenerated';
 import { registerMutation } from '../graphql/user/mutation/register';
-import { RegisterMutationVariables } from '../graphql/user/types';
 
 interface RegisterForm {
   email: string;

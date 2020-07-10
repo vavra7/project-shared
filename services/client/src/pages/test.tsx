@@ -3,10 +3,10 @@ import gql from 'graphql-tag';
 import { NextPage } from 'next';
 import { Container } from '../components/common/gridSystem';
 import Layout1 from '../components/layouts/layout1';
+import { AlertInput, AlertTypeEnum } from '../graphql/store/modelGenerated';
 import { addAlertMutation } from '../graphql/store/mutation/addAlert';
 import { hideAlertMutation } from '../graphql/store/mutation/hideAlert';
 import { alertsQuery } from '../graphql/store/query/alerts';
-import { AlertInput, AlertTypeEnum } from '../graphql/store/types';
 import Apollo from '../lib/apollo';
 
 const inputAlert: AlertInput = {

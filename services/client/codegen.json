@@ -1,7 +1,7 @@
 {
   "overwrite": true,
   "generates": {
-    "src/graphql/user/types.tsx": {
+    "src/graphql/user/modelGenerated.tsx": {
       "schema": "http://localhost:4000/graphql",
       "plugins": ["typescript", "typescript-operations", "typescript-react-apollo"],
       "documents": "src/graphql/user/**/*.ts",
@@ -10,7 +10,7 @@
         "withHOC": false
       }
     },
-    "src/graphql/store/types.tsx": {
+    "src/graphql/store/modelGenerated.tsx": {
       "schema": "src/store/typeDefs.ts",
       "plugins": [
         "typescript",
@@ -21,7 +21,7 @@
       "documents": "src/graphql/store/**/*.ts",
       "config": {
         "withComponent": false,
-        "withHOC": false
+        "withHOC": true
       }
     }
   },

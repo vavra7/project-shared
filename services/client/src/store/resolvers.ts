@@ -1,8 +1,8 @@
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import gql from 'graphql-tag';
 import moment from 'moment';
+import { Alert, AlertsQuery, MutationResolvers, Query } from '../graphql/store/modelGenerated';
 import { alertsQuery } from '../graphql/store/query/alerts';
-import { Alert, AlertsQuery, MutationResolvers, Query } from '../graphql/store/types';
 import { AppStore } from './initialState';
 
 export const resolvers = {

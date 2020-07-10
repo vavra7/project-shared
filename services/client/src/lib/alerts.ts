@@ -1,5 +1,3 @@
-import { addAlertMutation } from '../graphql/store/mutation/addAlert';
-import { hideAlertMutation } from '../graphql/store/mutation/hideAlert';
 import {
   AddAlertMutation,
   AddAlertMutationVariables,
@@ -7,7 +5,9 @@ import {
   AlertInput,
   HideAlertMutation,
   HideAlertMutationVariables
-} from '../graphql/store/types';
+} from '../graphql/store/modelGenerated';
+import { addAlertMutation } from '../graphql/store/mutation/addAlert';
+import { hideAlertMutation } from '../graphql/store/mutation/hideAlert';
 import Apollo from './apollo';
 
 export default {

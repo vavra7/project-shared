@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks';
 import { FC } from 'react';
+import { AlertsQuery } from '../../../graphql/store/modelGenerated';
 import { alertsQuery } from '../../../graphql/store/query/alerts';
-import { AlertsQuery } from '../../../graphql/store/types';
 import Alert from './Alert';
 
 const style = {

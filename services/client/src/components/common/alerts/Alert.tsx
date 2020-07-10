@@ -1,6 +1,6 @@
 import { motion, PanInfo, useAnimation, useMotionValue, useTransform } from 'framer-motion';
 import { FC, useEffect } from 'react';
-import { Alert as AlertObjectType, AlertTypeEnum } from '../../../graphql/store/types';
+import { Alert as AlertObjectType, AlertTypeEnum } from '../../../graphql/store/modelGenerated';
 import alerts from '../../../lib/alerts';
 import scopedStyles from './Alert.module.scss';
 
